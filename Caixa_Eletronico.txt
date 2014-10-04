@@ -1,0 +1,1 @@
+./Debug/main.cpp.o ./Debug/Caixa_Eletronico.cpp.o ./Debug/Data.cpp.o   
