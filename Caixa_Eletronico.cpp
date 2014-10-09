@@ -9,6 +9,13 @@ Data Caixa_Eletronico::data(05,10,2014);
 const int Caixa_Eletronico::IDBANCO = 55873;
 const string Caixa_Eletronico::NOMEBANCO = "Banco Universitario";
 
+bool operator == (const Caixa_Eletronico &c1, const Caixa_Eletronico &c2){
+	if (c1.modelo == c2.modelo && c1.dinheiro == c2.dinheiro && c1.conta == c2.conta && c1.saldo == c2.saldo && c1.data == c2.data)
+		return true;
+	else
+		return false;
+}
+
 Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string modelo)
 :dinheiro(dinheiro), modelo(modelo)
 {

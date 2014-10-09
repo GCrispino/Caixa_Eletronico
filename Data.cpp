@@ -10,6 +10,14 @@
 #include <iostream>
 using std::cout;
 
+
+bool operator == (Data &d1, Data &d2){
+	if (d1.dia == d2.dia && d1.mes == d2.mes && d1.ano == d2.ano)
+		return true;
+	else
+		return false;
+}
+
 Data::Data(int d, int m, int a) 
 {
     if ( m > 0 && m <= 12 ) // validate the month

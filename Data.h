@@ -10,6 +10,9 @@
 
 class Data 
 {
+	
+friend bool operator == (Data &, Data &);
+	
 public:
     
     Data( int = 1, int = 1, int = 1900 );

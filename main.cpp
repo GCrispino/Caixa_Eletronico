@@ -15,6 +15,13 @@ int main(int argc, char **argv)
 	int opcao1,opcao2,conta;
 	float saldo;
 	Caixa_Eletronico c(2000,"Caixa1"); //Dinheiro disponível no caixa e seu modelo definidos na declaração do objeto.
+	Caixa_Eletronico c1,c2;
+	
+	c1.info();
+	c2.info();
+	
+	
+	return 0;
 	
 	cout << "\n---Caixa eletronico---: ";
 	cout << "\nPressione qualquer tecla para continuar: ";

@@ -10,6 +10,10 @@ using namespace std;
 
 class Caixa_Eletronico
 {
+
+friend bool operator == (const Caixa_Eletronico &c1, const Caixa_Eletronico &c2); //Sobrecarga do operador "==".
+friend ostream &operator << (ostream &,const Caixa_Eletronico &);
+
 private:
 	float dinheiro; //Dinheiro disponível no caixa eletrônico.
 	string modelo; //Modelo do caixa eletrônico.

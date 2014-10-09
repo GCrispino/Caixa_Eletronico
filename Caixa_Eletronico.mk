@@ -5,7 +5,7 @@
 ## Debug
 ProjectName            :=Caixa_Eletronico
 ConfigurationName      :=Debug
-WorkspacePath          := "C:\Users\Crispino\Documents\ProgII\Elevador"
+WorkspacePath          := "C:\Users\Crispino\Documents\ProgII"
 ProjectPath            := "C:\Users\Crispino\Documents\ProgII\Caixa_Eletronico"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Crispino
-Date                   :=10/04/14
+Date                   :=10/09/14
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=C:/MinGW-4.8.1/bin/g++.exe 
 SharedObjectLinkerName :=C:/MinGW-4.8.1/bin/g++.exe -shared -fPIC
@@ -124,6 +124,6 @@ clean:
 	$(RM) ./Debug/*$(DependSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
-	$(RM) "../Elevador/.build-debug/Caixa_Eletronico"
+	$(RM) "../.build-debug/Caixa_Eletronico"
 
 
