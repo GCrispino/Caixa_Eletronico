@@ -7,22 +7,16 @@ using namespace std;
 
 #include "Caixa_Eletronico.h"
 
-void Menu1();
-void MenuOperacao();
+void Menu1(); //Menu principal do programa
+void MenuOperacao(); //Menu aberto quando se escolhe a opção de realizar uma operação no menu principal.
 
 int main(int argc, char **argv)
 {
 	int opcao1,opcao2,conta;
-	float saldo;
+	float saldo,dinheiro;
+	string modelo;
 	Caixa_Eletronico c(2000,"Caixa1"); //Dinheiro disponível no caixa e seu modelo definidos na declaração do objeto.
-	Caixa_Eletronico c1,c2;
-	
-	c1.info();
-	c2.info();
-	
-	
-	return 0;
-	
+	//Caixa_Eletronico c2; //Caixa que será usado caso o usuário decida trocar de caixa.
 	cout << "\n---Caixa eletronico---: ";
 	cout << "\nPressione qualquer tecla para continuar: ";
 	getch();
@@ -77,14 +71,37 @@ int main(int argc, char **argv)
 				getch();
 				break;
 			case 4:
-				cout<< "\nPrograma encerrado!";
+			{
+				cout << "\nDigite o modelo do novo caixa: ";
+				cin >> modelo;
+				cout << "\nDigite a quantidade de dinheiro que estara armazenada no novo caixa: ";
+				cin >> dinheiro;
+				
+				Caixa_Eletronico c2(dinheiro,modelo);
+				
+				
+				//c2.info();
+				
+				if (c2 == c){ //Uso da sobrecarga do operador "==".
+					cout <<"\n Um caixa com os mesmos dados de outro nao pode ser inserido!";
+					getch();
+					break;
+				}
+				else{
+					cout<< endl <<"Caixa "<<c<<" trocado pelo caixa "<<c2; //Uso da sobrecarga do operador "<<".
+					c = c2;
+				}
 				getch();
+				break;
+			}
+			case 5:
+				cout<< "\nPrograma encerrado!";
 				break;
 			default:
 				cout<<"\nOpcao invalida!";
 				break;
 		}
-	}while(opcao1 != 4);
+	}while(opcao1 != 5);
 	
 	getch();
 	return 0;
@@ -96,7 +113,8 @@ void Menu1(){
 	cout << "\n1. Entrar com uma conta. ";
 	cout << "\n2. Realizar alguma operacao. ";
 	cout << "\n3. Mostrar informacoes do caixa.";
-	cout << "\n4. Sair do programa.";
+	cout << "\n4. Usar outro caixa eletronico.";
+	cout << "\n5. Sair do programa.";
 }
 
 void MenuOperacao(){

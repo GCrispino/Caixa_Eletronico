@@ -3,8 +3,11 @@
 #include <conio.h>
 #include <stdlib.h>
 
+
 int Caixa_Eletronico::nclientes = 0;
 Data Caixa_Eletronico::data(05,10,2014);
+vector<int> Caixa_Eletronico::conta(0);
+vector<float> Caixa_Eletronico::saldo(0);
 
 const int Caixa_Eletronico::IDBANCO = 55873;
 const string Caixa_Eletronico::NOMEBANCO = "Banco Universitario";
@@ -14,6 +17,12 @@ bool operator == (const Caixa_Eletronico &c1, const Caixa_Eletronico &c2){
 		return true;
 	else
 		return false;
+}
+
+ostream &operator << (ostream &output,const Caixa_Eletronico &c){
+	output << c.modelo << " (" << c.NOMEBANCO<<")";
+	
+	return output;
 }
 
 Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string modelo)

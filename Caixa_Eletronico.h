@@ -12,14 +12,14 @@ class Caixa_Eletronico
 {
 
 friend bool operator == (const Caixa_Eletronico &c1, const Caixa_Eletronico &c2); //Sobrecarga do operador "==".
-friend ostream &operator << (ostream &,const Caixa_Eletronico &);
+friend ostream &operator << (ostream &,const Caixa_Eletronico &); //sobrecarga do operador "<<".
 
 private:
 	float dinheiro; //Dinheiro disponível no caixa eletrônico.
 	string modelo; //Modelo do caixa eletrônico.
 	
-	vector<int> conta; //Vector de strings que armazena as contas dos usuários.
-	vector<float> saldo; //Vector de float que armazena na posição i o saldo do usuário localizado
+	static vector<int> conta; //Vector de strings que armazena as contas dos usuários.
+	static vector<float> saldo; //Vector de float que armazena na posição i o saldo do usuário localizado
 						 //na posição i do vector 'conta'.]
 	
 	static int nclientes; //Número de clientes do banco.
