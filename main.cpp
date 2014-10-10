@@ -16,7 +16,14 @@ int main(int argc, char **argv)
 	float saldo,dinheiro;
 	string modelo;
 	Caixa_Eletronico c(2000,"Caixa1"); //Dinheiro disponível no caixa e seu modelo definidos na declaração do objeto.
-	//Caixa_Eletronico c2; //Caixa que será usado caso o usuário decida trocar de caixa.
+	Caixa_Eletronico c2(c);
+	
+	c.info();
+	cout<<endl;
+	c2.info();
+	
+	return 0;
+	
 	cout << "\n---Caixa eletronico---: ";
 	cout << "\nPressione qualquer tecla para continuar: ";
 	getch();
@@ -36,7 +43,7 @@ int main(int argc, char **argv)
 				}
 				break;
 			case 2:
-				if (c.getConta().empty()){
+				if (c.getNContas() == 0){
 					cout<<"\nNenhuma conta foi cadastrada!";
 					getch();
 				}
@@ -72,7 +79,7 @@ int main(int argc, char **argv)
 				break;
 			case 4:
 			{
-				cout << "\nDigite o modelo do novo caixa: ";
+				cout << "\nDigite o modelo do novo caixa(digite sem espaços, por favor): ";
 				cin >> modelo;
 				cout << "\nDigite a quantidade de dinheiro que estara armazenada no novo caixa: ";
 				cin >> dinheiro;

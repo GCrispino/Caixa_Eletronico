@@ -6,8 +6,9 @@
 
 int Caixa_Eletronico::nclientes = 0;
 Data Caixa_Eletronico::data(05,10,2014);
-vector<int> Caixa_Eletronico::conta(0);
+int *Caixa_Eletronico::conta = new int;		//Inicialização das variáveis 'static'
 vector<float> Caixa_Eletronico::saldo(0);
+int Caixa_Eletronico::ncontas = 0;
 
 const int Caixa_Eletronico::IDBANCO = 55873;
 const string Caixa_Eletronico::NOMEBANCO = "Banco Universitario";
@@ -41,9 +42,6 @@ Caixa_Eletronico::Caixa_Eletronico(Caixa_Eletronico &c){
 	this->nclientes = c.nclientes;
 	this->dinheiro = c.dinheiro;
 	this->modelo = c.modelo;
-	this->conta = c.conta;
-	this->saldo = c.saldo;
-	this->data = c.data;
 }
 
 Caixa_Eletronico::~Caixa_Eletronico()
@@ -56,14 +54,16 @@ int Caixa_Eletronico::setConta(int conta){
 		getch();
 		return -1;
 	}
-	else if (this->conta.size() == 0){
-		this->conta.push_back(conta);
-		Caixa_Eletronico::nclientes++;
+	else if (Caixa_Eletronico::ncontas == 0){
+		//this->conta.push_back(conta);
+		Caixa_Eletronico::conta[0] = conta; //Como o ponteiro "conta" é inicializado com um elemento, o novo elemento só é
+		Caixa_Eletronico::nclientes++;		//copiado para a primeira posição do ponteiro
+		Caixa_Eletronico::ncontas++;
 		return 0;
 	}
 	else{
 		int achou = 0;
-		for (unsigned int i = 0;i < this->conta.size();i++)
+		for (int i = 0;i < this->ncontas;i++)
 			if (this->conta[i] == conta){
 				achou = 1;
 				break;
@@ -75,8 +75,25 @@ int Caixa_Eletronico::setConta(int conta){
 			return -1;
 		}
 		else{
-			this->conta.push_back(conta);
+			//this->conta.push_back(conta);
+			int *aux = new int[ncontas];
+			
+			for (int i = 0;i < ncontas;i++)
+				aux[i] = this->conta[i];
+				
+			delete this->conta;
+
+			this->conta = new int[++this->ncontas];
+			
+			for (int i = 0;i < ncontas-1;i++)
+				this->conta[i] = aux[i];	
+				
+			this->conta[ncontas-1] = conta;
+			
+			delete [] aux;
+			
 			Caixa_Eletronico::nclientes++;
+			Caixa_Eletronico::ncontas++;
 			return 0;
 		}
 	}
@@ -88,19 +105,19 @@ void Caixa_Eletronico::setSaldo(int conta, float saldo){
 		return ;
 	}
 	else
-		for (unsigned int i = 0;i < this->conta.size();i++)
+		for (int i = 0;i < this->ncontas;i++)
 			if(conta == this->conta[i])
 				this->saldo.push_back(saldo);
 }
 
-vector<int> Caixa_Eletronico::getConta(){
-	return this->conta;
+int Caixa_Eletronico::getNContas(){
+	return this->ncontas;
 }
 
 void Caixa_Eletronico::saque(int conta){
 	int iconta = -1,achou = 0;;
 	
-	for (unsigned int i = 0; i < this->conta.size();i++) //Procura o numero da conta recebido no vector de contas.
+	for (int i = 0; i < this->ncontas;i++) //Procura o numero da conta recebido no vector de contas.
 		if (this->conta[i] == conta){
 			iconta = i;
 			achou = 1;
@@ -146,7 +163,7 @@ void Caixa_Eletronico::saque(int conta){
 void Caixa_Eletronico::pagamento(int conta){
 	int iconta1 = -1, iconta2 = iconta1, nconta,achou = 0;
 	
-	for (unsigned int i = 0; i < this->conta.size();i++)
+	for (int i = 0; i < this->ncontas;i++)	//Procura a conta passada como argumento
 		if (this->conta[i] == conta){
 			iconta1 = i;
 			achou = 1;
@@ -164,7 +181,7 @@ void Caixa_Eletronico::pagamento(int conta){
 		cin >> nconta;
 	
 		achou = 0;
-		for (unsigned int i = 0;i < this->conta.size();i++)
+		for (int i = 0;i < this->ncontas;i++)  //Procura o numero da conta que recebera o pagamento
 			if (this->conta[i] == nconta){
 				iconta2 = i;
 				achou = 1;
@@ -203,7 +220,7 @@ void Caixa_Eletronico::pagamento(int conta){
 }
 
 void Caixa_Eletronico::mostrarSaldo(int conta) const{
-	for (unsigned int i = 0;i < this->conta.size();i++)
+	for (int i = 0;i < this->ncontas;i++)
 		if (this->conta[i] == conta)
 			cout<<"\nO saldo da conta "<<this->conta[i]<<" e' de: R$"<<this->saldo[i];
 }

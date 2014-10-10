@@ -18,7 +18,8 @@ private:
 	float dinheiro; //Dinheiro disponível no caixa eletrônico.
 	string modelo; //Modelo do caixa eletrônico.
 	
-	static vector<int> conta; //Vector de strings que armazena as contas dos usuários.
+	static int *conta; //Ponteiro que representa o array de contas dos usuários.
+	static int ncontas;
 	static vector<float> saldo; //Vector de float que armazena na posição i o saldo do usuário localizado
 						 //na posição i do vector 'conta'.]
 	
@@ -37,7 +38,7 @@ public:
 	int setConta(int conta); //retorna -1 se o valor de entrada da conta ja existir ou for invalido.
 	void setSaldo(int conta, float saldo);
 	
-	vector<int> getConta();
+	int getNContas();
 	
 	void saque(int conta); //realiza uma operação de saque no caixa eletrônico.
 	void pagamento(int conta); //realiza uma operação de pagamento no caixa eletrônico.
