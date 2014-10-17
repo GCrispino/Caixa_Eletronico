@@ -31,7 +31,7 @@ private:
 	
 public:
 	Caixa_Eletronico(float dinheiro = 0, string modelo = ""); //Construtor default que inicializa as variaveis dinheiro e modelo.
-	Caixa_Eletronico(float dinheiro,string &modelo, int nclientes, Data data); //Construtor customizado para a modificação dos
+	Caixa_Eletronico(float dinheiro,string *modelo, int nclientes, Data data); //Construtor customizado para a modificação dos
 	Caixa_Eletronico(Caixa_Eletronico &); //Construtor de cópia				  //atributos static nclientes e data.
 	~Caixa_Eletronico();
 	
@@ -42,7 +42,7 @@ public:
 	
 	void saque(int conta); //realiza uma operação de saque no caixa eletrônico.
 	void pagamento(int conta); //realiza uma operação de pagamento no caixa eletrônico.
-	inline void mostrarSaldo(int conta) const; //imprime o saldo disponível na conta na tela.
+	void mostrarSaldo(int conta) const; //imprime o saldo disponível na conta na tela.
 	void info() const; //imprime as informações do caixa na tela.
 	static void mostrarData();//imprime a data na tela.
 };

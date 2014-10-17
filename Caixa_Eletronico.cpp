@@ -31,10 +31,18 @@ Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string modelo)
 {
 }
 
-Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string &modelo, int nclientes, Data data){
-	this->dinheiro = dinheiro;
-	this->modelo = modelo;
-	Caixa_Eletronico::nclientes = nclientes;
+Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string *modelo, int nclientes, Data data){
+	if (dinheiro >= 0)
+		this->dinheiro = dinheiro;
+	else
+		this->dinheiro = 0;
+		
+	
+	this->modelo = *modelo;
+	
+	if (nclientes >= 0)
+		Caixa_Eletronico::nclientes = nclientes;
+		
 	Caixa_Eletronico::data = data;
 }
 
