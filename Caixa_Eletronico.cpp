@@ -6,7 +6,7 @@
 
 int Caixa_Eletronico::nclientes = 0;
 Data Caixa_Eletronico::d(05,10,2014);
-int *Caixa_Eletronico::conta = new int;		//Inicialização das variáveis 'static'
+int *Caixa_Eletronico::conta = 0;		//Inicialização das variáveis 'static'
 vector<float> Caixa_Eletronico::saldo(0);
 int Caixa_Eletronico::ncontas = 0;
 
@@ -65,13 +65,14 @@ int Caixa_Eletronico::setConta(int conta){
 		return -1;
 	}
 	else if (Caixa_Eletronico::ncontas == 0){
-		//this->conta.push_back(conta);
-		Caixa_Eletronico::conta[0] = conta; //Como o ponteiro "conta" é inicializado com um elemento, o novo elemento só é
-		incrementaNClientes();					//copiado para a primeira posição do ponteiro
+		//Se o numero de contas for 0, é alocada a memória para o primeiro elemento.
+		Caixa_Eletronico::conta = new int;
+		Caixa_Eletronico::conta[0] = conta;
+		incrementaNClientes();
 		incrementaNContas();
 		return 0;
 	}
-	else{
+	else{//se não for igual a 0, faz a busca para checar se a conta dada ja existe..
 		int achou = 0;
 		for (int i = 0;i < this->ncontas;i++)
 			if (this->conta[i] == conta){
@@ -79,13 +80,12 @@ int Caixa_Eletronico::setConta(int conta){
 				break;
 			}
 		
-		if (achou == 1){
+		if (achou == 1){//...se ja existe, retorna um erro na funcao.
 			cout<<"\nConta ja existe!";
 			getch();
 			return -1;
 		}
-		else{
-			//this->conta.push_back(conta);
+		else{//caso contrário, aloca memória para um novo elemento.
 			int *aux = new int[ncontas];
 			
 			for (int i = 0;i < ncontas;i++)
