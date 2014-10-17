@@ -18,7 +18,7 @@ public:
     Data( int = 1, int = 1, int = 1900 );
     
     void print() const;
-    
+	
 private:
     
     int mes;
@@ -26,6 +26,8 @@ private:
     int ano;
     
     int VerificaDia( int ) const;
+	
+	
 
 
 };

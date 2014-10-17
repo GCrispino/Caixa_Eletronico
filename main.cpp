@@ -18,12 +18,6 @@ int main(int argc, char **argv)
 	Caixa_Eletronico c(2000,"Caixa1"); //Dinheiro disponível no caixa e seu modelo definidos na declaração do objeto.
 	Caixa_Eletronico c2(c);
 	
-	c.info();
-	cout<<endl;
-	c2.info();
-	
-	return 0;
-	
 	cout << "\n---Caixa eletronico---: ";
 	cout << "\nPressione qualquer tecla para continuar: ";
 	getch();
@@ -79,15 +73,12 @@ int main(int argc, char **argv)
 				break;
 			case 4:
 			{
-				cout << "\nDigite o modelo do novo caixa(digite sem espaços, por favor): ";
+				cout << "\nDigite o modelo do novo caixa(digite sem espacos, por favor): ";
 				cin >> modelo;
 				cout << "\nDigite a quantidade de dinheiro que estara armazenada no novo caixa: ";
 				cin >> dinheiro;
 				
 				Caixa_Eletronico c2(dinheiro,modelo);
-				
-				
-				//c2.info();
 				
 				if (c2 == c){ //Uso da sobrecarga do operador "==".
 					cout <<"\n Um caixa com os mesmos dados de outro nao pode ser inserido!";
