@@ -56,5 +56,3 @@ int Data::VerificaDia(int diaTeste) const
     
 }
 
-
-

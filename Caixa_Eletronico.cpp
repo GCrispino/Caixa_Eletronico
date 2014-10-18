@@ -5,16 +5,16 @@
 
 
 int Caixa_Eletronico::nclientes = 0;
-Data Caixa_Eletronico::data(05,10,2014);
-int *Caixa_Eletronico::conta = new int;		//Inicialização das variáveis 'static'
+Data Caixa_Eletronico::d(05,10,2014);
+int *Caixa_Eletronico::conta = 0;		//Inicialização das variáveis 'static'
 vector<float> Caixa_Eletronico::saldo(0);
 int Caixa_Eletronico::ncontas = 0;
 
 const int Caixa_Eletronico::IDBANCO = 55873;
 const string Caixa_Eletronico::NOMEBANCO = "Banco Universitario";
 
-bool operator == (const Caixa_Eletronico &c1, const Caixa_Eletronico &c2){
-	if (c1.modelo == c2.modelo && c1.dinheiro == c2.dinheiro && c1.conta == c2.conta && c1.saldo == c2.saldo && c1.data == c2.data)
+bool Caixa_Eletronico::operator == (const Caixa_Eletronico &c1){
+	if (this->modelo == c1.modelo && this->dinheiro == c1.dinheiro && this->conta == c1.conta && this->saldo == c1.saldo && this->d == c1.d)
 		return true;
 	else
 		return false;
@@ -26,16 +26,33 @@ ostream &operator << (ostream &output,const Caixa_Eletronico &c){
 	return output;
 }
 
+Caixa_Eletronico Caixa_Eletronico::operator =(const Caixa_Eletronico &c){
+	this->dinheiro = c.dinheiro;
+	this->modelo = c.modelo;
+	
+	return *this;
+}
+
 Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string modelo)
 :dinheiro(dinheiro), modelo(modelo)
 {
+	if (dinheiro >= 0)
+		this->dinheiro = dinheiro;
+	else
+		this->dinheiro = 0;
 }
 
-Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string &modelo, int nclientes, Data data){
-	this->dinheiro = dinheiro;
-	this->modelo = modelo;
-	Caixa_Eletronico::nclientes = nclientes;
-	Caixa_Eletronico::data = data;
+Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string *modelo, int nclientes, Data data){
+	if (dinheiro >= 0)
+		this->dinheiro = dinheiro;
+	else
+		this->dinheiro = 0;
+	this->modelo = *modelo;
+	
+	if (nclientes >= 0)
+		Caixa_Eletronico::nclientes = nclientes;
+		
+	Caixa_Eletronico::d = d; //variável data não precisa ser validada, pois a validação é feita dentro da classe 'data'
 }
 
 Caixa_Eletronico::Caixa_Eletronico(Caixa_Eletronico &c){
@@ -46,6 +63,7 @@ Caixa_Eletronico::Caixa_Eletronico(Caixa_Eletronico &c){
 
 Caixa_Eletronico::~Caixa_Eletronico()
 {
+	delete [] conta;
 }
 
 int Caixa_Eletronico::setConta(int conta){
@@ -55,13 +73,14 @@ int Caixa_Eletronico::setConta(int conta){
 		return -1;
 	}
 	else if (Caixa_Eletronico::ncontas == 0){
-		//this->conta.push_back(conta);
-		Caixa_Eletronico::conta[0] = conta; //Como o ponteiro "conta" é inicializado com um elemento, o novo elemento só é
-		Caixa_Eletronico::nclientes++;		//copiado para a primeira posição do ponteiro
-		Caixa_Eletronico::ncontas++;
+		//Se o numero de contas for 0, é alocada a memória para o primeiro elemento.
+		Caixa_Eletronico::conta = new int;
+		Caixa_Eletronico::conta[0] = conta;
+		incrementaNClientes();
+		incrementaNContas();
 		return 0;
 	}
-	else{
+	else{//se não for igual a 0, faz a busca para checar se a conta dada ja existe..
 		int achou = 0;
 		for (int i = 0;i < this->ncontas;i++)
 			if (this->conta[i] == conta){
@@ -69,13 +88,12 @@ int Caixa_Eletronico::setConta(int conta){
 				break;
 			}
 		
-		if (achou == 1){
+		if (achou == 1){//...se ja existe, retorna um erro na funcao.
 			cout<<"\nConta ja existe!";
 			getch();
 			return -1;
 		}
-		else{
-			//this->conta.push_back(conta);
+		else{//caso contrário, aloca memória para um novo elemento.
 			int *aux = new int[ncontas];
 			
 			for (int i = 0;i < ncontas;i++)
@@ -92,8 +110,8 @@ int Caixa_Eletronico::setConta(int conta){
 			
 			delete [] aux;
 			
-			Caixa_Eletronico::nclientes++;
-			Caixa_Eletronico::ncontas++;
+			incrementaNClientes();
+			incrementaNContas();
 			return 0;
 		}
 	}
@@ -225,6 +243,7 @@ void Caixa_Eletronico::mostrarSaldo(int conta) const{
 			cout<<"\nO saldo da conta "<<this->conta[i]<<" e' de: R$"<<this->saldo[i];
 }
 
+
 void Caixa_Eletronico::info() const{
 	cout<<"\n-- Informacoes gerais do caixa eletronico: \n";
 	cout<<"\nBanco: "<<NOMEBANCO<<"(ID do banco: "<<IDBANCO<<").";
@@ -235,5 +254,13 @@ void Caixa_Eletronico::info() const{
 
 void Caixa_Eletronico::mostrarData(){
 	cout<<"\n-Data: ";
-	Caixa_Eletronico::data.print();
+	Caixa_Eletronico::d.print();
+}
+
+void Caixa_Eletronico::incrementaNClientes(){
+	Caixa_Eletronico::nclientes++;
+}
+
+void Caixa_Eletronico::incrementaNContas(){
+	Caixa_Eletronico::ncontas++;
 }
