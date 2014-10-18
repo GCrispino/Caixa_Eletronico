@@ -87,7 +87,8 @@ int main(int argc, char **argv)
 				}
 				else{
 					cout<< endl <<"Caixa "<<c<<" trocado pelo caixa "<<c2; //Uso da sobrecarga do operador "<<".
-					c = c2;
+					c = c2; //Uso da sobrecarga do operador "=".
+					cout<<endl<<"Ola";
 				}
 				getch();
 				break;

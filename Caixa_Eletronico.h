@@ -10,8 +10,6 @@ using namespace std;
 
 class Caixa_Eletronico
 {
-
-friend bool operator == (const Caixa_Eletronico &c1, const Caixa_Eletronico &c2); //Sobrecarga do operador "==".
 friend ostream &operator << (ostream &,const Caixa_Eletronico &); //sobrecarga do operador "<<".
 
 private:
@@ -34,6 +32,9 @@ public:
 	Caixa_Eletronico(float dinheiro,string *modelo, int nclientes, Data data); //Construtor customizado para a modificação dos
 	Caixa_Eletronico(Caixa_Eletronico &); //Construtor de cópia				  //atributos static nclientes e data.
 	~Caixa_Eletronico();
+	
+	bool operator == (const Caixa_Eletronico &c1); //Sobrecarga do operador "==".
+	Caixa_Eletronico operator = (const Caixa_Eletronico &c); //Sobrecarga do operador "=".
 	
 	int setConta(int conta); //retorna -1 se o valor de entrada da conta ja existir ou for invalido.
 	void setSaldo(int conta, float saldo);

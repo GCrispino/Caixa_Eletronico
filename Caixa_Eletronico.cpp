@@ -13,8 +13,8 @@ int Caixa_Eletronico::ncontas = 0;
 const int Caixa_Eletronico::IDBANCO = 55873;
 const string Caixa_Eletronico::NOMEBANCO = "Banco Universitario";
 
-bool operator == (const Caixa_Eletronico &c1, const Caixa_Eletronico &c2){
-	if (c1.modelo == c2.modelo && c1.dinheiro == c2.dinheiro && c1.conta == c2.conta && c1.saldo == c2.saldo && c1.d == c2.d)
+bool Caixa_Eletronico::operator == (const Caixa_Eletronico &c1){
+	if (this->modelo == c1.modelo && this->dinheiro == c1.dinheiro && this->conta == c1.conta && this->saldo == c1.saldo && this->d == c1.d)
 		return true;
 	else
 		return false;
@@ -24,6 +24,13 @@ ostream &operator << (ostream &output,const Caixa_Eletronico &c){
 	output << c.modelo << " (" << c.NOMEBANCO<<")";
 	
 	return output;
+}
+
+Caixa_Eletronico Caixa_Eletronico::operator =(const Caixa_Eletronico &c){
+	this->dinheiro = c.dinheiro;
+	this->modelo = c.modelo;
+	
+	return *this;
 }
 
 Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string modelo)
@@ -56,6 +63,7 @@ Caixa_Eletronico::Caixa_Eletronico(Caixa_Eletronico &c){
 
 Caixa_Eletronico::~Caixa_Eletronico()
 {
+	delete [] conta;
 }
 
 int Caixa_Eletronico::setConta(int conta){
