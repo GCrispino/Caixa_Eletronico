@@ -111,7 +111,6 @@ int Caixa_Eletronico::setConta(int conta){
 			delete [] aux;
 			
 			incrementaNClientes();
-			incrementaNContas();
 			return 0;
 		}
 	}
