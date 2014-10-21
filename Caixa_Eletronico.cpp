@@ -169,7 +169,9 @@ void Caixa_Eletronico::registrarConta(){
 	u.setTelefone(telefone);
 	
 	cout<<endl<<"Endereco: ";
-	cin >> endereco;
+	cin.sync();
+	getline(cin,endereco);
+	
 		if (u.validaEndereco(endereco) != endereco){
 			cout<<endl<<"Valor inserido e' invalido. Sera atribuido um valor padrao";
 			getch();

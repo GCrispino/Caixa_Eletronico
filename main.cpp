@@ -4,6 +4,7 @@ using namespace std;
 
 #include <conio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "Caixa_Eletronico.h"
 
@@ -15,6 +16,7 @@ int main(int argc, char **argv)
 {
 	int opcao1,opcao2,opcao3,nconta;
 	float dinheiro;
+	char r;
 	string modelo,cpf;
 	Conta conta;
 	Caixa_Eletronico c(2000,"Caixa1"); //Dinheiro disponível no caixa e seu modelo definidos na declaração do objeto.
@@ -79,7 +81,15 @@ int main(int argc, char **argv)
 										system("cls");
 										Caixa_Eletronico::mostrarData();
 										Caixa_Eletronico::getConta()[c.buscaConta(nconta)].info();	//mostra as informacoes da conta dada, se ela existir.
-										Caixa_Eletronico::getConta()[c.buscaConta(nconta)].imprimeHistorico();
+										cout<<endl<<"Deseja visualizar o historico de operacoes recentes da conta(S ou N)?";
+										cin >> r;
+										r = toupper(r);
+										if (r == 'S'){// se o usuário desejar, mostra o histórico da conta.
+											Caixa_Eletronico::getConta()[c.buscaConta(nconta)].imprimeHistorico();
+											getch();
+										}
+										else
+											cout<<endl<<"Opcao invalida!";
 									}
 								
 								getch();
@@ -91,9 +101,11 @@ int main(int argc, char **argv)
 							cin >> cpf;
 							if (c.buscaCPF(cpf) == -1)
 								cout<<endl<<"CPF nao encontrado!";
-							else
+							else{
 								//Mostra as informações do usuário.
+								system("cls");
 								Caixa_Eletronico::getConta()[c.buscaCPF(cpf)].getUsuario().info(); 
+							}
 							getch();
 							break;
 						case 3:
