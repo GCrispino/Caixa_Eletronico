@@ -9,12 +9,14 @@ using namespace std;
 
 void Menu1(); //Menu principal do programa
 void MenuOperacao(); //Menu aberto quando se escolhe a opção de realizar uma operação no menu principal.
+void MenuInformacoes(); //Menu que controla as operações de mostrar informações sobre determinada classe.
 
 int main(int argc, char **argv)
 {
-	int opcao1,opcao2,conta;
-	float saldo,dinheiro;
-	string modelo;
+	int opcao1,opcao2,opcao3,nconta;
+	float dinheiro;
+	string modelo,cpf;
+	Conta conta;
 	Caixa_Eletronico c(2000,"Caixa1"); //Dinheiro disponível no caixa e seu modelo definidos na declaração do objeto.
 	Caixa_Eletronico c2(c);
 	
@@ -26,15 +28,8 @@ int main(int argc, char **argv)
 		cin >> opcao1;
 		switch(opcao1){
 			case 1:
-				cout<<"\nInsira o numero da conta: ";
-				cin >> conta;
-				if (c.setConta(conta) == -1) //Executa setConta() e verifica a validação do valor dado.
-					break;
-				else{
-					cout<<"\nDigite o valor do saldo dessa conta: ";
-					cin >> saldo;
-					c.setSaldo(conta,saldo);
-				}
+				system("cls");
+				c.registrarConta();
 				break;
 			case 2:
 				if (c.getNContas() == 0){
@@ -49,13 +44,13 @@ int main(int argc, char **argv)
 						switch(opcao2){
 							case 1:
 								cout<<"\nDigite o numero da sua conta: ";
-								cin >> conta;
-								c.saque(conta);
+								cin >> nconta;
+								c.saque(nconta);
 								break;
 							case 2:
 								cout<<"\nDigite o numero da sua conta: ";
-								cin >> conta;
-								c.pagamento(conta);
+								cin >> nconta;
+								c.pagamento(nconta);
 								break;
 							case 3:
 								break;
@@ -66,10 +61,51 @@ int main(int argc, char **argv)
 				}
 					break;
 			case 3:
-				system("cls");
-				Caixa_Eletronico::mostrarData();
-				c.info();
-				getch();
+				do{
+					MenuInformacoes();
+					cin >> opcao3;
+					
+					switch(opcao3){
+						case 1:
+						
+							if (c.getNContas() == 0)
+								cout<<endl<<"Nenhuma conta cadastrada!";
+							else{
+								cout<<endl<<"Digite o numero da conta: ";
+								cin >> nconta;
+									if (c.buscaConta(nconta) == -1)
+										cout<<endl<<"Conta informada nao encontrada!";
+									else{
+										system("cls");
+										Caixa_Eletronico::mostrarData();
+										Caixa_Eletronico::getConta()[c.buscaConta(nconta)].info();	//mostra as informacoes da conta dada, se ela existir.
+									}
+								
+								getch();
+							}
+							
+							break;
+						case 2:
+							cout<<endl<<"Digite o CPF do usuario: ";
+							cin >> cpf;
+							if (c.buscaCPF(cpf) == -1)
+								cout<<endl<<"CPF nao encontrado!";
+							else
+								//Mostra as informações do usuário.
+								Caixa_Eletronico::getConta()[c.buscaCPF(cpf)].getUsuario().info(); 
+							getch();
+							break;
+						case 3:
+							system("cls");
+							Caixa_Eletronico::mostrarData();
+							c.info();
+							getch();
+							break;
+						case 4:
+							break;
+					}
+				}while (opcao3 != 4);
+				
 				break;
 			case 4:
 			{
@@ -108,9 +144,9 @@ int main(int argc, char **argv)
 void Menu1(){
 	system("cls");
 	cout << "Selecione uma opcao: \n";
-	cout << "\n1. Entrar com uma conta. ";
+	cout << "\n1. Registrar uma conta. ";
 	cout << "\n2. Realizar alguma operacao. ";
-	cout << "\n3. Mostrar informacoes do caixa.";
+	cout << "\n3. Informacoes.";
 	cout << "\n4. Usar outro caixa eletronico.";
 	cout << "\n5. Sair do programa.";
 }
@@ -120,4 +156,13 @@ void MenuOperacao(){
 	cout<<"\n1. Saque.";
 	cout<<"\n2. Pagamento.";
 	cout<<"\n3. Voltar ao primeiro menu.";
+}
+
+void MenuInformacoes(){
+	system("cls");
+	cout<<endl<<"Escolha quais informacoes voce deseja obter. "<<endl;
+	cout<<endl<<"1. Informacoes sobre uma conta. ";
+	cout<<endl<<"2. Informacoes sobre um usuario de uma conta. ";
+	cout<<endl<<"3. Informacoes sobre o caixa eletronico. ";
+	cout<<endl<<"4. Voltar ao menu principal. ";
 }

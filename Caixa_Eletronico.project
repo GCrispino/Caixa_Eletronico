@@ -96,6 +96,10 @@
     <File Name="Caixa_Eletronico.cpp"/>
     <File Name="Data.h"/>
     <File Name="Data.cpp"/>
+    <File Name="Conta.cpp"/>
+    <File Name="Conta.h"/>
+    <File Name="Usuario.cpp"/>
+    <File Name="Usuario.h"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

@@ -7,6 +7,7 @@ using namespace std;
 #include<vector>
 
 #include "Data.h"
+#include "Conta.h"
 
 class Caixa_Eletronico
 {
@@ -16,7 +17,7 @@ private:
 	float dinheiro; //Dinheiro disponível no caixa eletrônico.
 	string modelo; //Modelo do caixa eletrônico.
 	
-	static int *conta; //Ponteiro que representa o array de contas dos usuários.
+	static Conta *c; //Ponteiro que representa o array de contas dos usuários.
 	static int ncontas;
 	static vector<float> saldo; //Vector de float que armazena na posição i o saldo do usuário localizado
 						 //na posição i do vector 'conta'.]
@@ -36,15 +37,21 @@ public:
 	bool operator == (const Caixa_Eletronico &c1); //Sobrecarga do operador "==".
 	Caixa_Eletronico operator = (const Caixa_Eletronico &c); //Sobrecarga do operador "=".
 	
-	int setConta(int conta); //retorna -1 se o valor de entrada da conta ja existir ou for invalido.
-	void setSaldo(int conta, float saldo);
+	static Conta * getConta(){
+		return Caixa_Eletronico::c;
+	}
+	int setConta(Conta conta); //retorna -1 se o valor de entrada da conta ja existir ou for invalido.
+	//void setSaldo(int conta, float saldo);
 	
 	int getNContas();
 	
-	void saque(int conta); //realiza uma operação de saque no caixa eletrônico.
-	void pagamento(int conta); //realiza uma operação de pagamento no caixa eletrônico.
+	void registrarConta();
+	void saque(int); //realiza uma operação de saque no caixa eletrônico.
+	void pagamento(int); //realiza uma operação de pagamento no caixa eletrônico.
 	void mostrarSaldo(int conta) const; //imprime o saldo disponível na conta na tela.
 	void info() const; //imprime as informações do caixa na tela.
+	int buscaConta(int); //faz uma busca de um numero de uma conta.
+	int buscaCPF(string); //faz uma busca de um usuario através do seu CPF.
 	static void mostrarData();//imprime a data na tela.
 	inline static void incrementaNClientes();
 	inline static void incrementaNContas();
