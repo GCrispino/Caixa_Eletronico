@@ -79,6 +79,7 @@ int main(int argc, char **argv)
 										system("cls");
 										Caixa_Eletronico::mostrarData();
 										Caixa_Eletronico::getConta()[c.buscaConta(nconta)].info();	//mostra as informacoes da conta dada, se ela existir.
+										Caixa_Eletronico::getConta()[c.buscaConta(nconta)].imprimeHistorico();
 									}
 								
 								getch();

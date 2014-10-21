@@ -213,19 +213,26 @@ void Caixa_Eletronico::registrarConta(){
 }
 
 void Caixa_Eletronico::saque(int conta){
-	int iconta = -1,achou = 0;;
+	int iconta = -1,achou = 0;
+	string senha;
+	bool achousenha = false;
 	
 	for (int i = 0; i < this->ncontas;i++) //Procura o numero da conta recebido no vetor de contas.
 		if (this->c[i].getNumero() == conta){
 			iconta = i;
 			achou = 1;
+			
+			cout<<endl<<"Digite a sua senha: ";
+			cin >> senha;
+			if (this->c[i].verificaSenha(senha))
+				achousenha = true;
 		}
 	if (achou == 0){
 		cout<<"\nConta nao encontrada!";
 		getch();
 		return ;
 	}	
-	else{
+	else if(achousenha){
 		float valor;
 		
 		cout<<"\nDigite o valor a ser sacado: ";
@@ -256,23 +263,34 @@ void Caixa_Eletronico::saque(int conta){
 				getch();
 			}
 	}
+	else{
+		cout<<endl<<"Senha invalida!";
+		getch();
+	}
 	
 }
 
 void Caixa_Eletronico::pagamento(int conta){
 	int iconta1 = -1, iconta2 = iconta1, nconta,achou = 0;
+	string senha;
+	bool achousenha = false;
 	
 	for (int i = 0; i < this->ncontas;i++)	//Procura a conta passada como argumento
 		if (this->c[i].getNumero() == conta){
 			iconta1 = i;
 			achou = 1;
+			
+			cout<<endl<<"Digite a sua senha: ";
+			cin >> senha;
+			if (this->c[i].verificaSenha(senha))
+				achousenha = true;
 		}
 	if (achou == 0){
 		cout<<"\nConta nao encontrada!";
 		getch();
 		return ;
 	}
-	else{
+	else if (achousenha){
 		
 		float valor;
 	
@@ -316,6 +334,10 @@ void Caixa_Eletronico::pagamento(int conta){
 	
 			}while (valor < 0 || valor > this->c[iconta1].getSaldo());
 		}
+	}
+	else{
+		cout<<endl<<"Senha invalida!";
+		getch();
 	}
 }
 
