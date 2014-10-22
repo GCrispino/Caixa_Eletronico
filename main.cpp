@@ -84,11 +84,9 @@ int main(int argc, char **argv)
 										cout<<endl<<"Deseja visualizar o historico de operacoes recentes da conta(S ou N)?";
 										cin >> r;
 										r = toupper(r);
-										if (r == 'S'){// se o usuário desejar, mostra o histórico da conta.
+										if (r == 'S')// se o usuário desejar, mostra o histórico da conta.
 											Caixa_Eletronico::getConta()[c.buscaConta(nconta)].imprimeHistorico();
-											getch();
-										}
-										else
+										else if (r != 'N')
 											cout<<endl<<"Opcao invalida!";
 									}
 								

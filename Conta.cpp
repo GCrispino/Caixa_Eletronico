@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//int qtdmax = 100;
+const float Conta::TAXA = 3.5; //declaração da variável const static 'taxa'.
 
 ostream &operator << (ostream &output,const Conta &c){
 	output << c.numero;
@@ -135,7 +135,6 @@ void Conta::imprimeHistorico(){
 	else if(this->noperacoes[0] == 0 ){
 		cout<<endl<<"Nenhum saque realizado na conta!!";
 		cout<<endl<<" Pagamentos mais recentes: ";
-		cout<<endl<<" "<<this->noperacoes[0]<<" "<<this->noperacoes[1];
 		for (int i = this->noperacoes[1];i > 0;i--)
 			cout<<endl<<"     R$"<<this->historico[1][i-1]<<" ";
 	}

@@ -4,7 +4,7 @@
     X Usar o destrutor
     X Construtor de cópia
     X Operator << friend
-    Um const static 
+    X Um const static 
 
  * A classe "conta" tem como objetivo guardar atributos e operaçãoes referentes a uma conta de um banco.
  * A sua estrutura é composta por dados comuns de uma conta de banco, contendo dados como número e senha da conta, e operações
@@ -34,6 +34,7 @@ private:
 						//...onde a posição zero indica o dinheiro movimentado nos últimos saques...
 						//...e a posição 1 indica o dinheiro movimentado nos últimos pagamentos.
 	int noperacoes[2]; //variável utilizada na alocação dinâmica feita pelo array de ponteiros 'historico'.
+	const static float TAXA; //variável que guarda a taxa fixa aplicada à qualquer pagamento de uma conta.
 public:
 	Conta(int numero = 0, string senha = "123456", float saldo = 0); //Construtor default.
 	Conta(Conta &); //Construtor de cópia
@@ -56,6 +57,9 @@ public:
 	}
 	Usuario getUsuario(){
 		return this->u;
+	}
+	static const float getTaxa(){
+		return TAXA;
 	}
 	
 	void info(); //mostra as informações da conta.

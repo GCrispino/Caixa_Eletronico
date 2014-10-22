@@ -323,7 +323,7 @@ void Caixa_Eletronico::pagamento(int conta){
 						getch();
 					}
 					else{								//A condição é aceita e o pagamento ocorre normalmente.
-						this->c[iconta1].setSaldo(c[iconta1].getSaldo() - valor);
+						this->c[iconta1].setSaldo(c[iconta1].getSaldo() - valor - Conta::getTaxa());
 						this->c[iconta2].setSaldo(c[iconta2].getSaldo() + valor);
 						this->c[iconta1].registraOperacao(1,valor);
 						

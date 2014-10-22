@@ -8,13 +8,14 @@ ostream &operator << (ostream &output, const Usuario &u){
 	return output;
 }
 
-Usuario::Usuario(string nome, int idade, string cpf, string telefone, string endereco, string rg)
+Usuario::Usuario(string nome, int idade, string cpf, string telefone, string endereco, string rg, string contas)
 {
 	this->nome = this->validaNome(nome);
 	this->idade = this->validaIdade(idade);
 	this->telefone = this->validaTelefone(telefone);
 	this->rg = this->validaRG(rg);
 	this->cpf = this->validaCPF(cpf);
+	this->ncontas = 0;
 }
 
 Usuario::Usuario(const Usuario &u){
@@ -24,10 +25,20 @@ Usuario::Usuario(const Usuario &u){
 	this->endereco = u.endereco;
 	this->rg = u.rg;
 	this->cpf = u.cpf;
+	this->ncontas = u.ncontas;
+	
+	//Cópia dos ponteiros: 
+	this->contas = new string[this->ncontas];
+	for (int i = 0;i < this->ncontas;i++)
+		this->contas[i] = u.contas[i];
 }
 
 Usuario::~Usuario()
 {
+	if (this->ncontas == 0)
+		delete this->contas;
+	else
+		delete [] this->contas;
 }
 
 Usuario Usuario::operator = (const Usuario &u){
