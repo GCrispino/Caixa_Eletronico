@@ -102,7 +102,16 @@ int main(int argc, char **argv)
 							else{
 								//Mostra as informações do usuário.
 								system("cls");
+								Caixa_Eletronico::mostrarData();
 								Caixa_Eletronico::getConta()[c.buscaCPF(cpf)].getUsuario().info(); 
+								getch();
+								cout<<endl<<"Deseja visualizar os numeros das contas desse usuario(S ou N)?";
+								cin >> r;
+								r = toupper(r);
+									if (r == 'S')// se o usuário desejar, mostra o histórico da conta.
+										Caixa_Eletronico::getConta()[c.buscaCPF(cpf)].getUsuario().imprimeContas();
+									else if (r != 'N')
+										cout<<endl<<"Opcao invalida!";
 							}
 							getch();
 							break;

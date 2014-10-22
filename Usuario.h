@@ -21,12 +21,12 @@ private:
 	string endereco;
 	string rg;
 	string cpf;
-	string *contas; //ponteiro de strings que guarda o número das contas registradas do usuário;
+	int *contas; //ponteiro de inteiros que guarda o número das contas registradas do usuário;
 	int ncontas; //inteiro que guarda o número de contas do usuário.
 	const static int QTDMAX;//quantidade máxima de contas de um usuário permitida.
 	
 public:
-	Usuario(string nome = "",int idade = 0,string cpf = "00000000000",string telefone = "11111111",string endereco = "",string rg = "00000000", string contas = 0);
+	Usuario(string nome = "",int idade = 0,string cpf = "00000000000",string telefone = "11111111",string endereco = "",string rg = "00000000");
 	Usuario(const Usuario &);
 	~Usuario();
 	
@@ -60,7 +60,13 @@ public:
 	string getCPF(){
 		return this->cpf;
 	}
-	
+	void setContas(int);
+	int getNContas(){
+		return this->ncontas;
+	}
+	const int getQTDMAX(){
+		return this->QTDMAX;
+	}
 	//funções de validação para cada atributo
 	int validaIdade(int);
 	string validaNome(string &);
@@ -70,7 +76,8 @@ public:
 	string validaCPF(string &);
 	
 	void info();
-	void imprimeUsuario(); //imprime o nome e cpf do usuario usando a sobrecarga do operador "<<".
+	void incrementaNContas();
+	void imprimeContas();
 	
 	//Função auxiliar utilizada para verifica se uma string dada é formada por números, para validar alguns atributos.
 	bool stringDigitos(const string &);

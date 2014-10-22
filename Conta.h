@@ -52,7 +52,7 @@ public:
 	int getNumero(){
 		return this->numero;
 	}
-	void setUsuario(Usuario &u){
+	void setUsuario(Usuario u){
 		this->u = u;
 	}
 	Usuario getUsuario(){

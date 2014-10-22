@@ -1,6 +1,9 @@
 #include "Usuario.h"
 
 #include <string>
+#include <conio.h>
+
+const int Usuario::QTDMAX = 3; //inicialização da variável const static 'QTDMAX'.
 
 ostream &operator << (ostream &output, const Usuario &u){
 	output << u.nome << "(" << u.cpf << ")";
@@ -8,7 +11,7 @@ ostream &operator << (ostream &output, const Usuario &u){
 	return output;
 }
 
-Usuario::Usuario(string nome, int idade, string cpf, string telefone, string endereco, string rg, string contas)
+Usuario::Usuario(string nome, int idade, string cpf, string telefone, string endereco, string rg)
 {
 	this->nome = this->validaNome(nome);
 	this->idade = this->validaIdade(idade);
@@ -16,6 +19,7 @@ Usuario::Usuario(string nome, int idade, string cpf, string telefone, string end
 	this->rg = this->validaRG(rg);
 	this->cpf = this->validaCPF(cpf);
 	this->ncontas = 0;
+	this->contas = NULL;
 }
 
 Usuario::Usuario(const Usuario &u){
@@ -28,9 +32,15 @@ Usuario::Usuario(const Usuario &u){
 	this->ncontas = u.ncontas;
 	
 	//Cópia dos ponteiros: 
-	this->contas = new string[this->ncontas];
-	for (int i = 0;i < this->ncontas;i++)
-		this->contas[i] = u.contas[i];
+	if (this->ncontas == 0)
+		this->contas = NULL;
+	else if(this->ncontas == 1)
+			this->contas = new int;
+	else{
+		this->contas = new int[this->ncontas];
+		for (int i = 0;i < this->ncontas;i++)
+			this->contas[i] = u.contas[i];
+	}
 }
 
 Usuario::~Usuario()
@@ -48,6 +58,16 @@ Usuario Usuario::operator = (const Usuario &u){
 	this->endereco = u.endereco;
 	this->rg = u.rg;
 	this->cpf = u.cpf;
+	this->ncontas = u.ncontas;
+	
+	//Cópia dos ponteiros: 
+	if (this->ncontas == 0)
+		this->contas = new int;
+	else{
+		this->contas = new int[this->ncontas];
+		for (int i = 0;i < this->ncontas;i++)
+			this->contas[i] = u.contas[i];
+	}
 	
 	return *this;
 }
@@ -113,10 +133,47 @@ void Usuario::info(){
 	cout<<endl<<"  - Endereco: "<<this->endereco<<".";
 	cout<<endl<<"  - RG: "<<this->rg<<".";
 	cout<<endl<<"  - CPF: "<<this->cpf<<".";
+	cout<<endl<<"  - Numero de contas do usuario: "<<this->ncontas<<".";
 }
 
-void Usuario::imprimeUsuario(){
-	cout<<*this;
+void Usuario::incrementaNContas(){
+	this->ncontas++;
+}
+
+void Usuario::imprimeContas(){
+	for (int i = 0;i < this->ncontas;i++){
+		cout<<endl<<"Numero da conta: "<<this->contas[i]<<".";
+		getch();
+	}
+}
+
+void Usuario::setContas(int nconta){
+	if (this->ncontas == 0){
+		this->contas = new int;
+		this->contas[0] = nconta;
+		this->incrementaNContas();
+	}
+	else{
+		int *aux = new int[this->ncontas];
+		int i;
+		
+		for (i = 0;i < this->ncontas;i++)
+			aux[i] = this->contas[i];
+			
+		delete this->contas;
+		
+		this->contas = new int[this->ncontas + 1];
+		
+		for (i = 0;i < this->ncontas;i++)
+			this->contas[i] = aux[i];
+			
+		this->contas[this->ncontas] = nconta;
+		
+		delete [] aux;
+		this->incrementaNContas();
+		cout<<endl<<"Numero de contas: "<<this->ncontas;
+		getch();
+	}
 }
 
 bool Usuario::stringDigitos(const string &s){
