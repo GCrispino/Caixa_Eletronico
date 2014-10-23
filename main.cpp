@@ -14,10 +14,11 @@ void MenuInformacoes(); //Menu que controla as operações de mostrar informaç�
 
 int main(int argc, char **argv)
 {
+	bool achousenha = false;
 	int opcao1,opcao2,opcao3,nconta;
 	float dinheiro;
 	char r;
-	string modelo,cpf;
+	string modelo,cpf,senha;
 	Conta conta;
 	Caixa_Eletronico c(2000,"Caixa1"); //Dinheiro disponível no caixa e seu modelo definidos na declaração do objeto.
 	Caixa_Eletronico c2(c);
@@ -78,6 +79,16 @@ int main(int argc, char **argv)
 									if (c.buscaConta(nconta) == -1)
 										cout<<endl<<"Conta informada nao encontrada!";
 									else{
+										do{
+											cout<<endl<<"Digite a sua senha: ";
+											cin >> senha;
+											if (Caixa_Eletronico::getConta()[c.buscaConta(nconta)].verificaSenha(senha))
+												achousenha = true;
+											if (achousenha == false){
+												cout<<endl<<"Senha invalida!";
+												getch();
+											}
+										}while(achousenha == false);
 										system("cls");
 										Caixa_Eletronico::mostrarData();
 										Caixa_Eletronico::getConta()[c.buscaConta(nconta)].info();	//mostra as informacoes da conta dada, se ela existir.

@@ -151,13 +151,13 @@ void Caixa_Eletronico::registrarConta(){
 			cout<<endl<<"Valor inserido e' invalido. Sera atribuido um valor padrao";
 			getch();
 		}
-		//Se o CPF for encontrado, e se o dono desse CPF não tiver ultrapassado o limite de número de contas,
-		//mais uma conta é registrada em seu nome.
+		//Se no CPF não for encontrado, é criado um usuário novo.
 		if (this->buscaCPF(cpf) == -1){	
 			u.setCPF(cpf);
 	
 			cout<<endl<<"Nome: ";
-			cin >> nome;
+			cin.sync();
+			getline(cin,nome);
 				if (u.validaNome(nome) != nome){
 					cout<<endl<<"Valor inserido e' invalido. Sera atribuido um valor padrao";
 					getch();
@@ -220,9 +220,12 @@ void Caixa_Eletronico::registrarConta(){
 	
 			this->setConta(conta);
 		}
-		else if (this->c[this->buscaCPF(cpf)].getUsuario().getNContas() < this->c[this->buscaCPF(cpf)].getUsuario().getQTDMAX()){ 
-			u.setCPF(cpf);
-			
+		//Se o CPF for encontrado, e se o dono desse CPF não tiver ultrapassado o limite de número de contas,
+		//mais uma conta é registrada em seu nome.
+		else if (Caixa_Eletronico::c[this->buscaCPF(cpf)].getUsuario().getNContas() < Caixa_Eletronico::c[this->buscaCPF(cpf)].getUsuario().getQTDMAX()){ 
+			//atribui ao usuário criado o usuário ao qual o CPF pertence, para depois sobrescrevê-lo no término desse método,
+			//para que os novos valores sejam atualizados.
+			u = Caixa_Eletronico::c[this->buscaCPF(cpf)].getUsuario();
 			system("cls");
 	
 			cout<<endl<<"Informacoes da conta: ";
@@ -239,16 +242,20 @@ void Caixa_Eletronico::registrarConta(){
 			cin >> saldo;
 			
 			Conta conta(numero,senha,saldo);
-
+			
 			//guarda o mesmo usuário que possui o CPF dado na conta nova.
-			conta.setUsuario(this->c[this->buscaCPF(cpf)].getUsuario());
+			conta.setUsuario(Caixa_Eletronico::c[this->buscaCPF(cpf)].getUsuario());
 			//guarda o numero da conta nova no usuário do CPF dado.
-			this->c[this->buscaCPF(cpf)].getUsuario().setContas(numero);
-	
+			u.setContas(numero);
+			Caixa_Eletronico::c[this->buscaCPF(cpf)].getUsuario().incrementaNContas();
+			
+			Caixa_Eletronico::c[this->buscaCPF(cpf)].setUsuario(u);
 			this->setConta(conta);
 		}
-		else
+		else{
 			cout<<endl<<"Limite de contas por usuario ultrapassado!";
+			getch();
+		}
 }
 
 void Caixa_Eletronico::saque(int conta){

@@ -34,8 +34,10 @@ Usuario::Usuario(const Usuario &u){
 	//Cópia dos ponteiros: 
 	if (this->ncontas == 0)
 		this->contas = NULL;
-	else if(this->ncontas == 1)
+	else if(this->ncontas == 1){
 			this->contas = new int;
+			this->contas[0] = u.contas[0];
+	}
 	else{
 		this->contas = new int[this->ncontas];
 		for (int i = 0;i < this->ncontas;i++)
@@ -137,7 +139,7 @@ void Usuario::info(){
 }
 
 void Usuario::incrementaNContas(){
-	this->ncontas++;
+	this->ncontas = this->ncontas + 1;
 }
 
 void Usuario::imprimeContas(){
@@ -162,17 +164,14 @@ void Usuario::setContas(int nconta){
 			
 		delete this->contas;
 		
-		this->contas = new int[this->ncontas + 1];
+		this->contas = new int[++this->ncontas];
 		
 		for (i = 0;i < this->ncontas;i++)
 			this->contas[i] = aux[i];
 			
-		this->contas[this->ncontas] = nconta;
+		this->contas[this->ncontas - 1] = nconta;
 		
 		delete [] aux;
-		this->incrementaNContas();
-		cout<<endl<<"Numero de contas: "<<this->ncontas;
-		getch();
 	}
 }
 
