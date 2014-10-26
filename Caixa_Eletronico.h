@@ -21,8 +21,7 @@ private:
 	static int ncontas;
 	static vector<float> saldo; //Vector de float que armazena na posição i o saldo do usuário localizado
 						 //na posição i do vector 'conta'.]
-	
-	static int nclientes; //Número de clientes do banco.
+//static int nclientes; //Número de clientes do banco.
 	static Data d; //Data armazenada no caixa.
 	
 	const static int IDBANCO; //ID universal do banco ao qual todos os caixas pertencem.
