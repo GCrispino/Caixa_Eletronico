@@ -5,7 +5,7 @@ Programação II(UFPA-CBCC2013) - Segunda Atividade - Caixa Eletrônico
 
 Quarta atividade: 
     Requisitos para quarta tarefa: 
-        Diagrama de classes (obrigatório salvar também o png do diagrama no gitHub)
+        Diagrama de classes (obrigatório salvar também o png do diagrama no gitHub) X
         Herança pública X
         Construtor de cópia, e sobrecargas dos operadores de atribuição (=) e << (cout << base) para a classe base e derivada X
         Usar Protected acessando diretamente os atributos na classe derivada X
