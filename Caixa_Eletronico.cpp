@@ -48,18 +48,6 @@ Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string modelo)
 		this->dinheiro = 0;
 }
 
-Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string *modelo, Data data)
-{
-	if (dinheiro >= 0)
-		this->dinheiro = dinheiro;
-	else
-		this->dinheiro = 0;
-	this->modelo = *modelo;
-
-	//if (nclientes >= 0)
-	//Caixa_Eletronico::nclientes = nclientes;
-}
-
 Caixa_Eletronico::Caixa_Eletronico(Caixa_Eletronico &c)
 {
 	//this->nclientes = c.nclientes;

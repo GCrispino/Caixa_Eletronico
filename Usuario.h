@@ -82,11 +82,10 @@ public:
 	string validaRG(string &);
 	string validaCPF(string &);
 	
-	//int registrarConta();
 	int buscaConta(int); //faz uma busca de um numero de uma conta em um usuário
-	void info();
-	void incrementaNContas();
-	void imprimeContas();
+	void info(); //Mostra as informações gerais de um usuário.
+	void incrementaNContas(); //incrementa o atributo "ncontas".
+	void imprimeContas();//imprime as contas pertencentes a um determinado usuário.
 
 	
 };

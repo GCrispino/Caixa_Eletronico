@@ -296,6 +296,56 @@ void Banco::pagamento(int conta)
 		}
 }
 
+void Banco::saque(int conta)
+{
+	int iconta = -1,iusuario = -1,achou = 0;
+	string senha;
+	bool achousenha = false;
+
+	for (int i = 0; i < this->getNUsuarios(); i++) //Procura o numero da conta recebido no vetor de contas.
+		for (int j = 0; j < this->u[i].getNContas(); j++)
+			if (this->u[i].getContas()[j].getNumero() == conta) {
+				iusuario = i;
+				iconta = j;
+				achou = 1;
+
+				cout<<endl<<"Digite a sua senha: ";
+				cin >> senha;
+				if (this->u[i].getContas()[j].verificaSenha(senha))
+					achousenha = true;
+			}
+	if (achou == 0) {
+		cout<<"\nConta nao encontrada!";
+		getch();
+		return ;
+	} else if(achousenha) {
+		float valor;
+
+		cout<<"\nDigite o valor a ser sacado: ";
+		cin >> valor;
+		if (valor > this->u[iusuario].getContas()[iconta].getSaldo()) {   //Não permite a inserção de dados maiores que o saldo da conta informada...
+			cout << "\nSaldo insuficiente!";
+			getch();
+			return ;
+		} else if (valor <= 0) {				//...nem a inserção de dados menores que 0...
+			cout << "\nValor invalido!!";
+			getch();
+			return ;
+		} else {								//A condição é aceita e o saque ocorre normalmente.
+			this->u[iusuario].getContas()[iconta].setSaldo(this->u[iusuario].getContas()[iconta].getSaldo() - valor);
+			this->u[iusuario].getContas()[iconta].registraOperacao(0,valor);
+
+			cout<<"\nO valor de R$"<<valor<<" foi sacado.";
+			cout<<"\nSaldo restante: R$"<<this->u[iusuario].getContas()[iconta].getSaldo()<<".";
+			getch();
+		}
+	} else {
+		cout<<endl<<"Senha invalida!";
+		getch();
+	}
+
+}
+
 void Banco::mostrarSaldo(int conta) const
 {
 	for (int i = 0; i < this->nusuarios; i++)

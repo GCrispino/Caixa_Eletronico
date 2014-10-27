@@ -35,13 +35,14 @@ public:
 	Usuario* getUsuario();
 	
 	
-	virtual void info() const;
+	void info() const;
 	
 	void registrarUsuario(string &); //Registra um usuário novo no Caixa.
 	int registrarConta(Usuario &); //Registra uma conta nova no usuário passado como parâmetro.
 	int buscaCPF(string); //faz uma busca de um usuario através do seu CPF.
+	void saque(int); //faz um saque pelo caixa do banco.
 	void pagamento(int); //realiza uma operação de pagamento de uma conta para outra.
-	void mostrarSaldo(int conta) const; //imprime o saldo disponível na conta na tela.
+	void mostrarSaldo(int) const; //imprime o saldo disponível na conta na tela.
 	void incrementaNContas();
 	static void mostrarData();//imprime a data na tela.
 };
