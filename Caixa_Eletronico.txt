@@ -1,1 +1,1 @@
-./Debug/main.cpp.o ./Debug/Caixa_Eletronico.cpp.o ./Debug/Data.cpp.o ./Debug/Conta.cpp.o ./Debug/Usuario.cpp.o   
+./Debug/main.cpp.o ./Debug/Caixa_Eletronico.cpp.o ./Debug/Data.cpp.o ./Debug/Conta.cpp.o ./Debug/Usuario.cpp.o ./Debug/Banco.cpp.o ./Debug/stringDigitos.cpp.o   

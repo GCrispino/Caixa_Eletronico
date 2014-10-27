@@ -1,4 +1,5 @@
 #include "Conta.h"
+#include "stringDigitos.h"
 #include <string>
 #include <conio.h>
 
@@ -39,7 +40,6 @@ Conta::Conta(int numero, string senha, float saldo)
 }
 
 Conta::Conta(Conta &c){
-	this->u = c.u;
 	this->numero = c.numero;
 	this->senha = c.senha;
 	this->saldo = c.saldo;
@@ -66,7 +66,6 @@ Conta::~Conta()
 }
 
 Conta Conta::operator =(const Conta &c){
-	this->u = c.u;
 	this->numero = c.numero;
 	this->senha = c.senha;
 	this->saldo = c.saldo;
@@ -89,20 +88,20 @@ Conta Conta::operator =(const Conta &c){
 }
 
 bool Conta::operator ==(const Conta &c){
-	return (this->u == c.u && this->numero == c.numero && this->senha == c.senha && this->saldo == c.saldo);
+	return (this->numero == c.numero && this->senha == c.senha && this->saldo == c.saldo);
 }
 
 void Conta::info(){
 	cout<<endl<<"-- Informacoes da conta: ";
 	cout<<endl<<" - Numero da conta: "<<this->numero<<".";
-	cout<<endl<<"Nome do proprietario: "<<this->u<<".";
+	//cout<<endl<<"Nome do proprietario: "<<this->u<<".";
 	//this->u.imprimeUsuario();
 	//cout<<".";
 	
 	cout<<endl<<"Saldo disponivel: R$"<<this->saldo<<".";
 }
 
-int Conta::verificaSenha(const string &senha){
+bool Conta::verificaSenha(const string &senha){
 	return (this->senha == senha);
 }
 
@@ -153,15 +152,4 @@ void Conta::imprimeHistorico(){
 		for (int i = this->noperacoes[1];i > 0;i--)
 			cout<<endl<<"     R$"<<this->historico[1][i-1]<<" ";
 	}
-}
-
-
-bool Conta::stringDigitos(const string &s){
-	if (s.empty())
-		return false;
-	for (unsigned int i = 0;i < s.size();i++)
-		if (isdigit(s[i]) == 0)
-			return false;
-	
-	return true;
 }

@@ -35,11 +35,11 @@ Usuario::Usuario(const Usuario &u){
 	if (this->ncontas == 0)
 		this->contas = NULL;
 	else if(this->ncontas == 1){
-			this->contas = new int;
+			this->contas = new Conta();
 			this->contas[0] = u.contas[0];
 	}
 	else{
-		this->contas = new int[this->ncontas];
+		this->contas = new Conta[this->ncontas];
 		for (int i = 0;i < this->ncontas;i++)
 			this->contas[i] = u.contas[i];
 	}
@@ -47,7 +47,7 @@ Usuario::Usuario(const Usuario &u){
 
 Usuario::~Usuario()
 {
-	if (this->ncontas == 0)
+	if (this->ncontas <= 1)
 		delete this->contas;
 	else
 		delete [] this->contas;
@@ -64,9 +64,13 @@ Usuario Usuario::operator = (const Usuario &u){
 	
 	//Cópia dos ponteiros: 
 	if (this->ncontas == 0)
-		this->contas = new int;
+		this->contas = NULL;
+	else if(this->ncontas == 1){
+			this->contas = new Conta();
+			this->contas[0] = u.contas[0];
+	}
 	else{
-		this->contas = new int[this->ncontas];
+		this->contas = new Conta[this->ncontas];
 		for (int i = 0;i < this->ncontas;i++)
 			this->contas[i] = u.contas[i];
 	}
@@ -149,14 +153,64 @@ void Usuario::imprimeContas(){
 	}
 }
 
-void Usuario::setContas(int nconta){
+/*int Caixa_Eletronico::setConta(Conta conta){
+	if (conta.getNumero() < 0){
+		cout<< "\nValor invalido!";
+		getch();
+		return -1;
+	}
+	else if (Caixa_Eletronico::ncontas == 0){
+		//Se o numero de contas for 0, é alocada a memória para o primeiro elemento.
+		Caixa_Eletronico::c = new Conta();
+		Caixa_Eletronico::c[0] = conta;
+//		incrementaNClientes();
+		incrementaNContas();
+		return 0;
+	}
+	else{//se não for igual a 0, faz a busca para checar se a conta dada ja existe..
+		int achou = 0;
+		for (int i = 0;i < this->ncontas;i++)
+			if (this->c[i] == conta){
+				achou = 1;
+				break;
+			}
+		
+		if (achou == 1){//...se ja existe, retorna um erro na funcao.
+			cout<<"\nConta ja existe!";
+			getch();
+			return -1;
+		}
+		else{//caso contrário, aloca memória para um novo elemento.
+			Conta *aux = new Conta[ncontas];
+			
+			for (int i = 0;i < ncontas;i++)
+				aux[i] = this->c[i];
+				
+			delete this->c;
+
+			this->c = new Conta[++this->ncontas];
+			
+			for (int i = 0;i < ncontas-1;i++)
+				this->c[i] = aux[i];	
+				
+			this->c[ncontas-1] = conta;
+			
+			delete [] aux;
+			
+//			incrementaNClientes();
+			return 0;
+		}
+	}
+}*/
+
+/*void Usuario::setContas(Conta nconta){
 	if (this->ncontas == 0){
-		this->contas = new int;
+		this->contas = new Conta();
 		this->contas[0] = nconta;
 		this->incrementaNContas();
 	}
 	else{
-		int *aux = new int[this->ncontas];
+		Conta *aux = new Conta[this->ncontas];
 		int i;
 		
 		for (i = 0;i < this->ncontas;i++)
@@ -164,7 +218,7 @@ void Usuario::setContas(int nconta){
 			
 		delete this->contas;
 		
-		this->contas = new int[++this->ncontas];
+		this->contas = new Conta[++this->ncontas];
 		
 		for (i = 0;i < this->ncontas;i++)
 			this->contas[i] = aux[i];
@@ -173,14 +227,96 @@ void Usuario::setContas(int nconta){
 		
 		delete [] aux;
 	}
-}
+}*/
 
-bool Usuario::stringDigitos(const string &s){
-	if (s.empty())
-		return false;
-	for (unsigned int i = 0;i < s.size();i++)
-		if (isdigit(s[i]) == 0)
-			return false;
+
+int Usuario::setConta(Conta conta){
+	if (conta.getNumero() < 0){
+		cout<< "\nValor invalido!";
+		getch();
+		return -1;
+	}
+	else if (this->ncontas == 0){
+		//Se o numero de contas for 0, é alocada a memória para o primeiro elemento.
+		this->contas = new Conta();
+		this->contas[0] = conta;
+		this->ncontas++;
+		return 0;
+	}
+	else{//se não for igual a 0, faz a busca para checar se a conta dada ja existe..
+		int achou = 0;
+		for (int i = 0;i < this->ncontas;i++)
+			if (this->contas[i] == conta){
+				achou = 1;
+				break;
+			}
+		
+		if (achou == 1){//...se ja existe, retorna um erro na funcao.
+			cout<<"\nConta ja existe!";
+			getch();
+			return -1;
+		}
+		else{//caso contrário, aloca memória para um novo elemento.
+			Conta *aux = new Conta[ncontas];
+			
+			for (int i = 0;i < ncontas;i++)
+				aux[i] = this->contas[i];
+				
+			delete this->contas;
+
+			this->contas = new Conta[++this->ncontas];
+			
+			for (int i = 0;i < ncontas-1;i++)
+				this->contas[i] = aux[i];	
+				
+			this->contas[ncontas-1] = conta;
+			
+			delete [] aux;
+			
+//			incrementaNClientes();
+			return 0;
+		}
+	}
+}
+ 
+/*int Usuario::registrarConta(){
+	string senha;
+	int numero;
+	float saldo;
 	
-	return true;
+	if (this->ncontas == Usuario::QTDMAX){
+		cout<<endl<<"Numero maximo de contas por usuario ja alcancado!";
+		return -1;
+	}
+
+	cout<<endl<<"Informacoes da conta: ";
+	do{
+		cout<<endl<<"Numero da conta: ";
+		cin >> numero;
+			if (this->buscaConta(numero) != -1)
+				cout<<endl<<"Conta ja existe!";
+	}while(this->buscaConta(numero) != -1);
+			
+	cout<<endl<<"Senha: ";
+	cin >> senha;
+	cout<<endl<<"Saldo: ";
+	cin >> saldo;
+		
+	Conta conta(numero,senha,saldo);
+	
+	this->setConta(conta);
+	
+	return 0;
+}*/
+
+int Usuario::buscaConta(int nconta){
+	
+	if (this->ncontas == 0)
+		return -1;
+	
+	for (int i = 0; i < this->ncontas;i++)
+		if (this->contas[i].getNumero() == nconta)
+			return i;
+		
+	return -1;
 }

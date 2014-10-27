@@ -100,6 +100,10 @@
     <File Name="Conta.h"/>
     <File Name="Usuario.cpp"/>
     <File Name="Usuario.h"/>
+    <File Name="Banco.h"/>
+    <File Name="Banco.cpp"/>
+    <File Name="stringDigitos.h"/>
+    <File Name="stringDigitos.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

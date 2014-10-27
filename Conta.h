@@ -11,8 +11,6 @@
  * como mostrar as informações da conta e mostrar o histórico de operações.
 */
 
-#include "Usuario.h"
-
 #include <iostream>
 
 using namespace std;
@@ -26,7 +24,6 @@ class Conta
 	friend ostream &operator << (ostream &,const Conta &); //sobrecarga do operador "<<".
 	
 private:
-	Usuario u; //Usuario da conta.
 	int numero;  //Número da conta.
 	string senha;   //Senha da conta
 	float saldo; //Saldo da conta
@@ -52,23 +49,22 @@ public:
 	int getNumero(){
 		return this->numero;
 	}
-	void setUsuario(Usuario u){
+	/*void setUsuario(Usuario u){
 		this->u = u;
 	}
 	Usuario getUsuario(){
 		return this->u;
-	}
+	}*/
 	static const float getTaxa(){
 		return TAXA;
 	}
 	
 	void info(); //mostra as informações da conta.
-	int verificaSenha(const string &); //verifica se a senha dada é a senha da conta.
+	bool verificaSenha(const string &); //verifica se a senha dada é a senha da conta.
 	void registraOperacao(int tipo,float valor); //registra uma operação na matriz(array de ponteiros) 'historico'.
 	void imprimeHistorico();//imprime o histórico de operações da conta.
 	
 	//Função auxiliar utilizada para verifica se uma string dada é formada por números, para validar os atributos nome e senha.
-	bool stringDigitos(const string &); 
 };
 
 #endif // CONTA_H

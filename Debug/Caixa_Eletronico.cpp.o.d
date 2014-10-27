@@ -1,10 +1,12 @@
 Debug/Caixa_Eletronico.cpp.o: Caixa_Eletronico.cpp Caixa_Eletronico.h \
- Data.h Conta.h Usuario.h
+ Data.h Usuario.h Conta.h stringDigitos.h
 
 Caixa_Eletronico.h:
 
 Data.h:
 
+Usuario.h:
+
 Conta.h:
 
-Usuario.h:
+stringDigitos.h:

@@ -7,6 +7,8 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
+#include "Conta.h"
+#include "stringDigitos.h"
 #include <iostream>
 
 using namespace std;
@@ -21,7 +23,7 @@ private:
 	string endereco;
 	string rg;
 	string cpf;
-	int *contas; //ponteiro de inteiros que guarda o número das contas registradas do usuário;
+	Conta *contas; //ponteiro de inteiros que guarda o número das contas registradas do usuário;
 	int ncontas; //inteiro que guarda o número de contas do usuário.
 	const static int QTDMAX;//quantidade máxima de contas de um usuário permitida.
 	
@@ -60,13 +62,18 @@ public:
 	string getCPF(){
 		return this->cpf;
 	}
-	void setContas(int);
+	int setConta(Conta);
+	void setContas(Conta);
+	Conta * getContas(){
+		return this->contas;
+	}
 	int getNContas(){
 		return this->ncontas;
 	}
 	const int getQTDMAX(){
 		return this->QTDMAX;
 	}
+	
 	//funções de validação para cada atributo
 	int validaIdade(int);
 	string validaNome(string &);
@@ -75,12 +82,11 @@ public:
 	string validaRG(string &);
 	string validaCPF(string &);
 	
+	//int registrarConta();
+	int buscaConta(int); //faz uma busca de um numero de uma conta em um usuário
 	void info();
 	void incrementaNContas();
 	void imprimeContas();
-	
-	//Função auxiliar utilizada para verifica se uma string dada é formada por números, para validar alguns atributos.
-	bool stringDigitos(const string &);
 
 	
 };

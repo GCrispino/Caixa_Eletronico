@@ -1,5 +1,5 @@
-Debug/Conta.cpp.o: Conta.cpp Conta.h Usuario.h
+Debug/Conta.cpp.o: Conta.cpp Conta.h stringDigitos.h
 
 Conta.h:
 
-Usuario.h:
+stringDigitos.h:

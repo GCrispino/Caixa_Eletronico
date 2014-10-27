@@ -7,6 +7,7 @@ using namespace std;
 #include <ctype.h>
 
 #include "Caixa_Eletronico.h"
+#include "stringDigitos.h"
 
 void Menu1(); //Menu principal do programa
 void MenuOperacao(); //Menu aberto quando se escolhe a opção de realizar uma operação no menu principal.
@@ -14,8 +15,8 @@ void MenuInformacoes(); //Menu que controla as operações de mostrar informaç�
 
 int main(int argc, char **argv)
 {
-	bool achousenha = false;
-	int opcao1,opcao2,opcao3,nconta;
+	bool achousenha = false,achoucpf = false,achouconta = false;
+	int i,opcao1,opcao2,opcao3,nconta;
 	float dinheiro;
 	char r;
 	string modelo,cpf,senha;
@@ -32,7 +33,32 @@ int main(int argc, char **argv)
 		switch(opcao1){
 			case 1:
 				system("cls");
-				c.registrarConta();
+				//c.registrarConta();
+				do{
+					cout<<endl<<"Digite o CPF do dono da nova conta: ";
+					cin >> cpf;
+					
+					if (stringDigitos(cpf) == 0 && cpf.size() != 11)
+						cout<<endl<<"CPF invalido!";
+				}while(stringDigitos(cpf) == 0 && cpf.size() != 11);
+				
+				for (i = 0;i < c.getNUsuarios();i++)
+					if (c.getUsuario()[i].getCPF() == cpf){
+						achoucpf = true;
+						break;
+					}
+				if (achoucpf){
+					if (c.registrarConta(c.getUsuario()[i]) != -1){
+						c.incrementaNContas();
+					}
+				}
+				else{
+					c.registrarUsuario(cpf);
+					c.incrementaNContas();
+				}
+				
+				//modifica o valor da variável 'achoucpf' para false para que as próximas verificações ocorram sem problemas.
+				achoucpf = false; 
 				break;
 			case 2:
 				if (c.getNContas() == 0){
@@ -71,61 +97,73 @@ int main(int argc, char **argv)
 					switch(opcao3){
 						case 1:
 						
-							if (c.getNContas() == 0)
+							if (c.getNContas() == 0){
 								cout<<endl<<"Nenhuma conta cadastrada!";
+								getch();
+							}
 							else{
 								cout<<endl<<"Digite o numero da conta: ";
 								cin >> nconta;
-									if (c.buscaConta(nconta) == -1)
-										cout<<endl<<"Conta informada nao encontrada!";
-									else{
+								for (i = 0;i < c.getNUsuarios();i++){
+										if (c.getUsuario()[i].buscaConta(nconta) != -1){
+											//cout<<endl<<"Conta informada nao encontrada!";
+											achouconta = true;
+											break;
+										}
+								}
+									
+									if (achouconta)
 										do{
 											cout<<endl<<"Digite a sua senha: ";
 											cin >> senha;
-											if (Caixa_Eletronico::getConta()[c.buscaConta(nconta)].verificaSenha(senha))
+											if (c.getUsuario()[i].getContas()[c.getUsuario()[i].buscaConta(nconta)].verificaSenha(senha))
 												achousenha = true;
 											if (achousenha == false){
 												cout<<endl<<"Senha invalida!";
 												getch();
 											}
-										}while(achousenha == false);
+										}while(c.getUsuario()[i].getContas()[c.getUsuario()[i].buscaConta(nconta)].verificaSenha(senha) != true);
 										system("cls");
 										Caixa_Eletronico::mostrarData();
-										Caixa_Eletronico::getConta()[c.buscaConta(nconta)].info();	//mostra as informacoes da conta dada, se ela existir.
+										c.getUsuario()[i].getContas()[c.getUsuario()[i].buscaConta(nconta)].info();	//mostra as informacoes da conta dada, se ela existir.
 										cout<<endl<<"Deseja visualizar o historico de operacoes recentes da conta(S ou N)?";
 										cin >> r;
 										r = toupper(r);
 										if (r == 'S')// se o usuário desejar, mostra o histórico da conta.
-											Caixa_Eletronico::getConta()[c.buscaConta(nconta)].imprimeHistorico();
+											c.getUsuario()[i].getContas()[c.getUsuario()[i].buscaConta(nconta)].imprimeHistorico();
 										else if (r != 'N')
 											cout<<endl<<"Opcao invalida!";
-									}
 								
+								achouconta = false;
 								getch();
 							}
 							
 							break;
 						case 2:
-							cout<<endl<<"Digite o CPF do usuario: ";
-							cin >> cpf;
-							if (c.buscaCPF(cpf) == -1)
-								cout<<endl<<"CPF nao encontrado!";
+							if (c.getNUsuarios() == 0)
+								cout<<endl<<"Nenhum usuario cadastrado!";
 							else{
-								//Mostra as informações do usuário.
-								system("cls");
-								Caixa_Eletronico::mostrarData();
-								Caixa_Eletronico::getConta()[c.buscaCPF(cpf)].getUsuario().info(); 
-								getch();
-								cout<<endl<<"Deseja visualizar os numeros das contas desse usuario(S ou N)?";
-								cin >> r;
-								r = toupper(r);
-									if (r == 'S')// se o usuário desejar, mostra o histórico da conta.
-										Caixa_Eletronico::getConta()[c.buscaCPF(cpf)].getUsuario().imprimeContas();
-									else if (r != 'N')
-										cout<<endl<<"Opcao invalida!";
+								cout<<endl<<"Digite o CPF do usuario: ";
+								cin >> cpf;
+								if (c.buscaCPF(cpf) == -1)
+									cout<<endl<<"CPF nao encontrado!";
+								else{
+									//Mostra as informações do usuário.
+									system("cls");
+									Caixa_Eletronico::mostrarData();
+									c.getUsuario()[c.buscaCPF(cpf)].info(); 
+									getch();
+									cout<<endl<<"Deseja visualizar os numeros das contas desse usuario(S ou N)?";
+									cin >> r;
+									r = toupper(r);
+										if (r == 'S')// se o usuário desejar, mostra o histórico da conta.
+											c.getUsuario()[c.buscaCPF(cpf)].imprimeContas();
+										else if (r != 'N')
+											cout<<endl<<"Opcao invalida!";
+								}
 							}
-							getch();
-							break;
+								getch();
+								break;
 						case 3:
 							system("cls");
 							Caixa_Eletronico::mostrarData();
