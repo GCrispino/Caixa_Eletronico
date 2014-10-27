@@ -278,36 +278,6 @@ int Usuario::setConta(Conta conta){
 		}
 	}
 }
- 
-/*int Usuario::registrarConta(){
-	string senha;
-	int numero;
-	float saldo;
-	
-	if (this->ncontas == Usuario::QTDMAX){
-		cout<<endl<<"Numero maximo de contas por usuario ja alcancado!";
-		return -1;
-	}
-
-	cout<<endl<<"Informacoes da conta: ";
-	do{
-		cout<<endl<<"Numero da conta: ";
-		cin >> numero;
-			if (this->buscaConta(numero) != -1)
-				cout<<endl<<"Conta ja existe!";
-	}while(this->buscaConta(numero) != -1);
-			
-	cout<<endl<<"Senha: ";
-	cin >> senha;
-	cout<<endl<<"Saldo: ";
-	cin >> saldo;
-		
-	Conta conta(numero,senha,saldo);
-	
-	this->setConta(conta);
-	
-	return 0;
-}*/
 
 int Usuario::buscaConta(int nconta){
 	

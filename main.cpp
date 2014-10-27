@@ -6,6 +6,7 @@ using namespace std;
 #include <stdlib.h>
 #include <ctype.h>
 
+#include "Banco.h"
 #include "Caixa_Eletronico.h"
 #include "stringDigitos.h"
 
@@ -112,7 +113,7 @@ int main(int argc, char **argv)
 										}
 								}
 									
-									if (achouconta)
+									if (achouconta){
 										do{
 											cout<<endl<<"Digite a sua senha: ";
 											cin >> senha;
@@ -133,6 +134,11 @@ int main(int argc, char **argv)
 											c.getUsuario()[i].getContas()[c.getUsuario()[i].buscaConta(nconta)].imprimeHistorico();
 										else if (r != 'N')
 											cout<<endl<<"Opcao invalida!";
+									}
+									else{
+										cout<<endl<<"Conta nao encontrada!";
+										getch();
+									}
 								
 								achouconta = false;
 								getch();
