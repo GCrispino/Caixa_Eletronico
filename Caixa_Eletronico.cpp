@@ -26,13 +26,18 @@ Caixa_Eletronico Caixa_Eletronico::operator =(const Caixa_Eletronico &c)
 	return *this;
 }
 
-Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string modelo)
+Caixa_Eletronico::Caixa_Eletronico(float dinheiro,const string modelo)
 :dinheiro(dinheiro), modelo(modelo)
 {
 	if (dinheiro >= 0)
 		this->dinheiro = dinheiro;
 	else
 		this->dinheiro = 0;
+}
+
+Caixa_Eletronico::Caixa_Eletronico(const string &modelo)
+:modelo(modelo){
+	this->dinheiro = 3000;
 }
 
 Caixa_Eletronico::Caixa_Eletronico(const Caixa_Eletronico &c)

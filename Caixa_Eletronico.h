@@ -40,7 +40,9 @@ private:
 	
 	
 public:
-	Caixa_Eletronico(float dinheiro = 0, string modelo = ""); //Construtor default que inicializa as variaveis dinheiro e modelo.
+	Caixa_Eletronico(float dinheiro = 0, const string modelo = ""); //Construtor default que inicializa as variaveis dinheiro e modelo.
+	//Construtor alternativo que define a variável modelo e ja define automaticamente a variável dinheiro com o valor padrão 3000.
+	Caixa_Eletronico(const string &modelo);
 	Caixa_Eletronico(const Caixa_Eletronico &); //Construtor de cópia
 	~Caixa_Eletronico();
 	

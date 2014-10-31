@@ -34,7 +34,6 @@ int main(int argc, char **argv)
 		switch(opcao1){
 			case 1:
 				system("cls");
-				//c.registrarConta();
 				do{
 					cout<<endl<<"Digite o CPF do dono da nova conta: ";
 					cin >> cpf;

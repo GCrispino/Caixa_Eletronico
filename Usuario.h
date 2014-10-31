@@ -65,7 +65,8 @@ public:
 	string validaEndereco(const string &);
 	string validaRG(const string &);
 	string validaCPF(const string &);
-
+	
+	
 	int buscaConta(const int); //faz uma busca de um numero de uma conta em um usuário
 	void info(); //Mostra as informações gerais de um usuário.
 	void incrementaNContas(); //incrementa o atributo "ncontas".
