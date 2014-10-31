@@ -35,7 +35,7 @@ Caixa_Eletronico::Caixa_Eletronico(float dinheiro,string modelo)
 		this->dinheiro = 0;
 }
 
-Caixa_Eletronico::Caixa_Eletronico(Caixa_Eletronico &c)
+Caixa_Eletronico::Caixa_Eletronico(const Caixa_Eletronico &c)
 {
 	//this->nclientes = c.nclientes;
 	this->dinheiro = c.dinheiro;

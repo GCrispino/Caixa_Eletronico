@@ -21,7 +21,7 @@ protected:
 	const static Data dataAtual;
 public:
 	Banco(string nome = "",int id = 123456);
-	Banco(Banco &b);
+	Banco(const Banco &b);
 	virtual ~Banco();
 	
 	Banco operator = (const Banco &); //sobrecarga do operador "=".

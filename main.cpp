@@ -39,9 +39,9 @@ int main(int argc, char **argv)
 					cout<<endl<<"Digite o CPF do dono da nova conta: ";
 					cin >> cpf;
 					
-					if (stringDigitos(cpf) == 0 && cpf.size() != 11)
+					if (stringDigitos(&cpf) == 0 && cpf.size() != 11)
 						cout<<endl<<"CPF invalido!";
-				}while(stringDigitos(cpf) == 0 && cpf.size() != 11);
+				}while(stringDigitos(&cpf) == 0 && cpf.size() != 11);
 				
 				for (i = 0;i < c.getNUsuarios();i++)
 					if (c.getUsuario()[i].getCPF() == cpf){

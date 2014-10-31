@@ -104,28 +104,28 @@ int Usuario::validaIdade(const int idade){
 }
 
 string Usuario::validaTelefone(const string &telefone){
-	if (stringDigitos(telefone) && telefone.size() == 8)
+	if (stringDigitos(&telefone) && telefone.size() == 8)
 		return telefone;
 	else 
 		return "11111111";
 }
 
 string Usuario::validaEndereco(const string &endereco){
-	if (stringDigitos(endereco))
+	if (stringDigitos(&endereco))
 		return "";
 	else
 		return endereco;
 }
 
 string Usuario::validaRG(const string &rg){
-	if (stringDigitos(rg))
+	if (stringDigitos(&rg))
 		return rg;
 	else
 		return "00000000";
 }
 
 string Usuario::validaCPF(const string &cpf){
-	if (stringDigitos(cpf) && cpf.size() == 11)
+	if (stringDigitos(&cpf) && cpf.size() == 11)
 		return cpf;
 	else
 		return "00000000000";

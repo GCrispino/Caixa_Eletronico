@@ -13,7 +13,7 @@ ostream &operator << (ostream &output,const Banco &b){
 Banco::Banco(string nome,int id)
 :id(id)
 {
-	if (stringDigitos(nome))
+	if (stringDigitos(&nome))
 		this->nome = "";
 	else 
 		this->nome = nome;
@@ -24,7 +24,7 @@ Banco::Banco(string nome,int id)
 	
 }
 
-Banco::Banco(Banco &b){
+Banco::Banco(const Banco &b){
 	this->id = b.id;
 	this->nome = b.nome;
 	this->nusuarios = b.nusuarios;

@@ -11,13 +11,13 @@
  /*
   * ERROS A SEREM CORRIGIDOS: 
   * - Nomes genéricos: -CORRIGIDO!
-  * - sobrecarregado o operador da classe data
+  * - sobrecarregado o operador da classe data - CORRIGIDO PREVIAMENTE
   * - evitar retornar vetores.
-  * - "const string &" - consertar.
+  * - "const string &" - consertar.-CORRIGIDO!
   * - validação de dados na classe banco
   * - 3 construtores ???
   * - função inline
-  * - método com passagem por referência usando ponteiro
+  * - método com passagem por referência usando ponteiro -CORRIGIDO
   * - Sobrecarga de operador "=" tem vazamento de memória
   * 
   */
@@ -41,7 +41,7 @@ private:
 	
 public:
 	Caixa_Eletronico(float dinheiro = 0, string modelo = ""); //Construtor default que inicializa as variaveis dinheiro e modelo.
-	Caixa_Eletronico(Caixa_Eletronico &); //Construtor de cópia
+	Caixa_Eletronico(const Caixa_Eletronico &); //Construtor de cópia
 	~Caixa_Eletronico();
 	
 	bool operator == (const Caixa_Eletronico &c1); //Sobrecarga do operador "==".

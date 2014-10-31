@@ -22,7 +22,7 @@ Conta::Conta(int numero, string senha, float saldo)
 	else
 		this->numero = numero;
 	
-	if (stringDigitos(senha) && senha.size() == 6)
+	if (stringDigitos(&senha) && senha.size() == 6)
 		this->senha = senha;
 	else
 		this->senha = "123456";
@@ -39,7 +39,7 @@ Conta::Conta(int numero, string senha, float saldo)
 	this->historico[1] = 0;
 }
 
-Conta::Conta(Conta &c){
+Conta::Conta(const Conta &c){
 	this->numero = c.numero;
 	this->senha = c.senha;
 	this->saldo = c.saldo;

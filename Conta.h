@@ -34,7 +34,7 @@ private:
 	const static float TAXA; //variável que guarda a taxa fixa aplicada à qualquer pagamento de uma conta.
 public:
 	Conta(int numero = 0, string senha = "123456", float saldo = 0); //Construtor default.
-	Conta(Conta &); //Construtor de cópia
+	Conta(const Conta &); //Construtor de cópia
 	~Conta(); //Destrutor
 	
 	Conta operator = (const Conta &);//Sobrecarga do operador "=" para atribuição.
