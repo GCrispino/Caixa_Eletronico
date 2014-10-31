@@ -50,6 +50,9 @@ Conta::Conta(const Conta &c){
 	//"Cópia" dos ponteiros
 	int i;
 	
+	delete [] this->historico[0];
+	delete [] this->historico[1];
+	
 	this->historico[0] = new float [c.noperacoes[0]];
 	for (i = 0;i < c.noperacoes[0];i++)
 		this->historico[0][i] = c.historico[0][i];
@@ -75,6 +78,8 @@ Conta Conta::operator =(const Conta &c){
 	
 	//"Cópia" dos ponteiros
 	int i;
+	
+	
 	
 	this->historico[0] = new float [c.noperacoes[0]];
 	for (i = 0;i < c.noperacoes[0];i++)

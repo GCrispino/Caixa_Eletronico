@@ -59,6 +59,11 @@ Banco Banco::operator =(const Banco &b){
 	this->ntotalcontas = b.ntotalcontas;
 	
 	//Cópia do conteúdo ponteiro 'u':
+	if (nusuarios <= 1)
+		delete this->userpadrao;
+	else
+		delete [] this->userpadrao;
+		
 	if (this->nusuarios == 0)
 		this->userpadrao = 0;
 	else if (this->nusuarios == 1){

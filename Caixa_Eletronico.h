@@ -18,7 +18,7 @@
   * - 3 construtores - CORRIGIDO
   * - função inline - CORRIGIDO
   * - método com passagem por referência usando ponteiro -CORRIGIDO
-  * - Sobrecarga de operador "=" tem vazamento de memória
+  * - Sobrecarga de operador "=" tem vazamento de memória - CORRIGIDO
   * 
   */
 #ifndef CAIXA_ELETRONICO_H

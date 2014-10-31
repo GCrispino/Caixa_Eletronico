@@ -63,6 +63,11 @@ Usuario Usuario::operator = (const Usuario &u){
 	this->ncontas = u.ncontas;
 	
 	//Cópia dos ponteiros: 
+	if (this->ncontas <= 1)
+		delete this->contausuario;
+	else
+		delete [] this->contausuario;
+	
 	if (this->ncontas == 0)
 		this->contausuario = 0;
 	else if(this->ncontas == 1){
