@@ -10,7 +10,7 @@ using namespace std;
 #include "Caixa_Eletronico.h"
 #include "stringDigitos.h"
 
-void MenuCaixaEletronico(); //Menu principal do programa
+void Menu1(); //Menu principal do programa
 void MenuOperacao(); //Menu aberto quando se escolhe a opção de realizar uma operação no menu principal.
 void MenuInformacoes(); //Menu que controla as operações de mostrar informações sobre determinada classe.
 
@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	cout << "\nPressione qualquer tecla para continuar: ";
 	getch();
 	do{
-		MenuCaixaEletronico();
+		Menu1();
 		cin >> opcao1;
 		switch(opcao1){
 			case 1:
@@ -217,23 +217,6 @@ int main(int argc, char **argv)
 }
 
 void Menu1(){
-	system("cls");
-	cout << "Selecione uma opcao: ";
-	cout<<endl<<"1. Usar o caixa no banco: ";
-	cout<<endl<<"2. Usar o caixa eletronico: ";
-}
-
-void MenuBanco(){
-	system("cls");
-	cout << "Selecione uma opcao: \n";
-	cout << "\n1. Registrar uma conta. ";
-	cout << "\n2. Realizar alguma operacao. ";
-	cout << "\n3. Informacoes.";
-	cout << "\n4. Usar outro caixa eletronico.";
-	cout << "\n5. Sair do programa.";
-}
-
-void MenuCaixaEletronico(){
 	system("cls");
 	cout << "Selecione uma opcao: \n";
 	cout << "\n1. Registrar uma conta. ";

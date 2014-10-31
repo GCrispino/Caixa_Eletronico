@@ -8,19 +8,6 @@
         Sobrescrita de método: chamar dentro do método da classe derivada o método correspondente da classe base usando ::
         No main: criar um ponteiro da classe base para alocar memória para a classe derivada e chamar os vários métodos implementados
  */
- /*
-  * ERROS A SEREM CORRIGIDOS: 
-  * - Nomes genéricos:
-  * - sobrecarregado o operador da classe data
-  * - evitar retornar vetores.
-  * - "const string &" - consertar.
-  * - validação de dados na classe banco
-  * - 3 construtores ???
-  * - função inline
-  * - método com passagem por referência usando ponteiro
-  * - Sobrecarga de operador "=" tem vazamento de memória
-  * 
-  */
 #ifndef CAIXA_ELETRONICO_H
 #define CAIXA_ELETRONICO_H
 
