@@ -163,7 +163,7 @@ int Usuario::setConta(Conta &conta){
 		//Se o numero de contas for 0, é alocada a memória para o primeiro elemento.
 		this->contausuario = new Conta();
 		this->contausuario[0] = conta;
-		this->ncontas++;
+		this->incrementaNContas();
 		return 0;
 	}
 	else{//se não for igual a 0, faz a busca para checar se a conta dada ja existe..

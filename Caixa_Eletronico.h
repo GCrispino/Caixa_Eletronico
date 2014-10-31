@@ -15,8 +15,8 @@
   * - evitar retornar vetores.
   * - "const string &" - consertar.-CORRIGIDO!
   * - validação de dados na classe banco
-  * - 3 construtores ???
-  * - função inline
+  * - 3 construtores - CORRIGIDO
+  * - função inline - CORRIGIDO
   * - método com passagem por referência usando ponteiro -CORRIGIDO
   * - Sobrecarga de operador "=" tem vazamento de memória
   * 

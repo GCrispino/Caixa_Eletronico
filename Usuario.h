@@ -69,7 +69,7 @@ public:
 	
 	int buscaConta(const int); //faz uma busca de um numero de uma conta em um usuário
 	void info(); //Mostra as informações gerais de um usuário.
-	void incrementaNContas(); //incrementa o atributo "ncontas".
+	inline void incrementaNContas(); //incrementa o atributo "ncontas".
 	void imprimeContas();//imprime as contas pertencentes a um determinado usuário.
 
 
