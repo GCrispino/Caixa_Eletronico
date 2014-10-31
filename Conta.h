@@ -49,12 +49,6 @@ public:
 	int getNumero(){
 		return this->numero;
 	}
-	/*void setUsuario(Usuario u){
-		this->u = u;
-	}
-	Usuario getUsuario(){
-		return this->u;
-	}*/
 	static const float getTaxa(){
 		return TAXA;
 	}

@@ -35,8 +35,8 @@ Conta::Conta(int numero, string senha, float saldo)
 	this->noperacoes[0] = 0;
 	this->noperacoes[1] = 0;
 	
-	this->historico[0] = NULL;
-	this->historico[1] = NULL;
+	this->historico[0] = 0;
+	this->historico[1] = 0;
 }
 
 Conta::Conta(Conta &c){

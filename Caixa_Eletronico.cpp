@@ -3,19 +3,6 @@
 #include <conio.h>
 #include <stdlib.h>
 
-
-//int Caixa_Eletronico::nclientes = 0;
-//Data Caixa_Eletronico::d(05,10,2014);
-//Conta *Caixa_Eletronico::c = 0;		//Inicialização das variáveis 'static'
-//Usuario *Caixa_Eletronico::u = 0;
-//vector<float> Caixa_Eletronico::saldo(0);
-//int Caixa_Eletronico::ncontas = 0;
-//int Caixa_Eletronico::nusuarios = 0;
-//int Caixa_Eletronico::ntotalcontas = 0;
-
-//const int Caixa_Eletronico::IDBANCO = 55873;
-//const string Caixa_Eletronico::NOMEBANCO = "Banco Universitario";
-
 bool Caixa_Eletronico::operator == (const Caixa_Eletronico &c1)
 {
 	if (this->modelo == c1.modelo && this->dinheiro == c1.dinheiro)
@@ -57,10 +44,10 @@ Caixa_Eletronico::Caixa_Eletronico(Caixa_Eletronico &c)
 
 Caixa_Eletronico::~Caixa_Eletronico()
 {
-	if (Caixa_Eletronico::nusuarios <= 1)
-		delete u;
+	if (this->nusuarios <= 1)
+		delete this->userpadrao;
 	else
-		delete [] u;
+		delete [] this->userpadrao;
 }
 
 void Caixa_Eletronico::saque(int conta)
@@ -70,15 +57,15 @@ void Caixa_Eletronico::saque(int conta)
 	bool achousenha = false;
 
 	for (int i = 0; i < this->getNUsuarios(); i++) //Procura o numero da conta recebido no vetor de contas.
-		for (int j = 0; j < this->u[i].getNContas(); j++)
-			if (this->u[i].getContas()[j].getNumero() == conta) {
+		for (int j = 0; j < this->userpadrao[i].getNContas(); j++)
+			if (this->userpadrao[i].getContas()[j].getNumero() == conta) {
 				iusuario = i;
 				iconta = j;
 				achou = 1;
 
 				cout<<endl<<"Digite a sua senha: ";
 				cin >> senha;
-				if (this->u[i].getContas()[j].verificaSenha(senha))
+				if (this->userpadrao[i].getContas()[j].verificaSenha(senha))
 					achousenha = true;
 			}
 	if (achou == 0) {
@@ -90,7 +77,7 @@ void Caixa_Eletronico::saque(int conta)
 
 		cout<<"\nDigite o valor a ser sacado: ";
 		cin >> valor;
-		if (valor > this->u[iusuario].getContas()[iconta].getSaldo()) {   //Não permite a inserção de dados maiores que o saldo da conta informada...
+		if (valor > this->userpadrao[iusuario].getContas()[iconta].getSaldo()) {   //Não permite a inserção de dados maiores que o saldo da conta informada...
 			cout << "\nSaldo insuficiente!";
 			getch();
 			return ;
@@ -103,12 +90,12 @@ void Caixa_Eletronico::saque(int conta)
 			getch();
 			return ;
 		} else {								//A condição é aceita e o saque ocorre normalmente.
-			this->u[iusuario].getContas()[iconta].setSaldo(this->u[iusuario].getContas()[iconta].getSaldo() - valor);
+			this->userpadrao[iusuario].getContas()[iconta].setSaldo(this->userpadrao[iusuario].getContas()[iconta].getSaldo() - valor);
 			this->dinheiro -= valor;
-			this->u[iusuario].getContas()[iconta].registraOperacao(0,valor);
+			this->userpadrao[iusuario].getContas()[iconta].registraOperacao(0,valor);
 
 			cout<<"\nO valor de R$"<<valor<<" foi sacado.";
-			cout<<"\nSaldo restante: R$"<<this->u[iusuario].getContas()[iconta].getSaldo()<<".";
+			cout<<"\nSaldo restante: R$"<<this->userpadrao[iusuario].getContas()[iconta].getSaldo()<<".";
 			cout<<"\nDinheiro restante no caixa: R$"<<this->dinheiro<<".";
 			getch();
 		}
@@ -127,8 +114,3 @@ void Caixa_Eletronico::info() const
 	cout<<"\nNumero de contas do banco: "<<this->ntotalcontas<<".";
 	cout<<"\nDinheiro disponivel no caixa: R$"<<this->dinheiro<<".";
 }
-
-/*void Caixa_Eletronico::incrementaNContas()
-{
-	Caixa_Eletronico::ntotalcontas++;
-}*/
