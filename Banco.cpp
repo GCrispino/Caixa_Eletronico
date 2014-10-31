@@ -83,7 +83,7 @@ int Banco::getNUsuarios()
 	return this->nusuarios;
 }
 
-void Banco::setUsuario(Usuario u){
+void Banco::setUsuario(const Usuario &u){
 	if (this->nusuarios == 0){
 		//Se o numero de usuarios for igual a zero, é alocada memória para o primeiro usuário
 		this->userpadrao = new Usuario();
@@ -124,7 +124,7 @@ void Banco::info() const{
 	cout<<endl<<"- Numero total de contas: "<<this->ntotalcontas;
 }
 
-void Banco::registrarUsuario(string &cpf){
+void Banco::registrarUsuario(const string &cpf){
 	string nome,telefone,endereco,rg,senha;
 	int idade;
 	Usuario u;
@@ -224,7 +224,7 @@ int Banco::registrarConta(Usuario &u){
 	return 0;
 }
 
-void Banco::pagamento(int conta)
+void Banco::pagamento(const int conta)
 {
 	int iconta1 = -1, iconta2 = iconta1, iusuario1 = -1, iusuario2 = -1,nconta,achou = 0;
 	string senha;
@@ -296,7 +296,7 @@ void Banco::pagamento(int conta)
 		}
 }
 
-void Banco::saque(int conta)
+void Banco::saque(const int conta)
 {
 	int iconta = -1,iusuario = -1,achou = 0;
 	string senha;
@@ -346,7 +346,7 @@ void Banco::saque(int conta)
 
 }
 
-void Banco::mostrarSaldo(int conta) const
+void Banco::mostrarSaldo(const int conta) const
 {
 	for (int i = 0; i < this->nusuarios; i++)
 		for (int j = 0; j < this->userpadrao[i].getNContas(); j++)
@@ -364,7 +364,7 @@ void Banco::mostrarData()
 	Banco::dataAtual.print();
 }
 
-int Banco::buscaCPF(string cpf)
+int Banco::buscaCPF(const string &cpf)
 {
 
 	for (int i = 0; i < this->nusuarios; i++)

@@ -50,7 +50,7 @@ Caixa_Eletronico::~Caixa_Eletronico()
 		delete [] this->userpadrao;
 }
 
-void Caixa_Eletronico::saque(int conta)
+void Caixa_Eletronico::saque(const int conta)
 {
 	int iconta = -1,iusuario = -1,achou = 0;
 	string senha;

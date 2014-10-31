@@ -31,18 +31,18 @@ public:
 	
 	int getNUsuarios();
 	
-	void setUsuario(Usuario u);
+	void setUsuario(const Usuario &u);
 	Usuario* getUsuario();
 	
 	
 	void info() const;
 	
-	void registrarUsuario(string &); //Registra um usuário novo no Caixa.
+	void registrarUsuario(const string &); //Registra um usuário novo no Caixa.
 	int registrarConta(Usuario &); //Registra uma conta nova no usuário passado como parâmetro.
-	int buscaCPF(string); //faz uma busca de um usuario através do seu CPF.
-	void saque(int); //faz um saque pelo caixa do banco.
-	void pagamento(int); //realiza uma operação de pagamento de uma conta para outra.
-	void mostrarSaldo(int) const; //imprime o saldo disponível na conta na tela.
+	int buscaCPF(const string &); //faz uma busca de um usuario através do seu CPF.
+	void saque(const int); //faz um saque pelo caixa do banco.
+	void pagamento(const int); //realiza uma operação de pagamento de uma conta para outra.
+	void mostrarSaldo(const int) const; //imprime o saldo disponível na conta na tela.
 	void incrementaNContas();
 	static void mostrarData();//imprime a data na tela.
 };

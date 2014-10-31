@@ -82,7 +82,7 @@ bool Usuario::operator ==(const Usuario &u){
 	return (this->nome==nome && this->idade==idade && this->telefone==telefone && this->endereco==endereco && this->rg==rg && this->cpf==cpf);
 }
 
-string Usuario::validaNome(string &nome){
+string Usuario::validaNome(const string &nome){
 	bool achoudigito = false;
 	
 	for (unsigned int i = 0;i < nome.size();i++)
@@ -95,7 +95,7 @@ string Usuario::validaNome(string &nome){
 		return nome;
 }
 
-int Usuario::validaIdade(int idade){
+int Usuario::validaIdade(const int idade){
 	if (idade <= 0 || idade >= 180)
 		return 1; //se a idade for inválida, retorna uma idade default igual a 1.
 	else
@@ -103,28 +103,28 @@ int Usuario::validaIdade(int idade){
 	
 }
 
-string Usuario::validaTelefone(string &telefone){
+string Usuario::validaTelefone(const string &telefone){
 	if (stringDigitos(telefone) && telefone.size() == 8)
 		return telefone;
 	else 
 		return "11111111";
 }
 
-string Usuario::validaEndereco(string &endereco){
+string Usuario::validaEndereco(const string &endereco){
 	if (stringDigitos(endereco))
 		return "";
 	else
 		return endereco;
 }
 
-string Usuario::validaRG(string &rg){
+string Usuario::validaRG(const string &rg){
 	if (stringDigitos(rg))
 		return rg;
 	else
 		return "00000000";
 }
 
-string Usuario::validaCPF(string &cpf){
+string Usuario::validaCPF(const string &cpf){
 	if (stringDigitos(cpf) && cpf.size() == 11)
 		return cpf;
 	else

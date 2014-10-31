@@ -36,19 +36,19 @@ public:
 	bool operator == (const Usuario &); //Sobrecarga do operador "==".
 
 	//funções get e set
-	void setNome(string nome) {
+	void setNome(const string &nome) {
 		this->nome = Usuario::validaNome(nome);
 	}
 
-	void setIdade(int idade) {
+	void setIdade(const int idade) {
 		this->idade = Usuario::validaIdade(idade);
 	}
 
-	void setTelefone(string telefone) {
+	void setTelefone(const string &telefone) {
 		this->telefone = Usuario::validaTelefone(telefone);
 	}
 
-	void setEndereco(string endereco) {
+	void setEndereco(const string endereco) {
 		this->endereco = Usuario::validaEndereco(endereco);
 	}
 
@@ -75,14 +75,14 @@ public:
 	}
 
 	//funções de validação para cada atributo
-	int validaIdade(int);
-	string validaNome(string &);
-	string validaTelefone(string &);
-	string validaEndereco(string &);
-	string validaRG(string &);
-	string validaCPF(string &);
+	int validaIdade(const int);
+	string validaNome(const string &);
+	string validaTelefone(const string &);
+	string validaEndereco(const string &);
+	string validaRG(const string &);
+	string validaCPF(const string &);
 
-	int buscaConta(int); //faz uma busca de um numero de uma conta em um usuário
+	int buscaConta(const int); //faz uma busca de um numero de uma conta em um usuário
 	void info(); //Mostra as informações gerais de um usuário.
 	void incrementaNContas(); //incrementa o atributo "ncontas".
 	void imprimeContas();//imprime as contas pertencentes a um determinado usuário.

@@ -10,7 +10,7 @@
  */
  /*
   * ERROS A SEREM CORRIGIDOS: 
-  * - Nomes genéricos:
+  * - Nomes genéricos: -CORRIGIDO!
   * - sobrecarregado o operador da classe data
   * - evitar retornar vetores.
   * - "const string &" - consertar.
@@ -48,7 +48,7 @@ public:
 	Caixa_Eletronico operator = (const Caixa_Eletronico &c); //Sobrecarga do operador "=".
 	
 	
-	void saque(int); //realiza uma operação de saque no caixa eletrônico.
+	void saque(const int); //realiza uma operação de saque no caixa eletrônico.
 	void info() const; //imprime as informações do caixa na tela.
 };
 
