@@ -36,43 +36,27 @@ public:
 	bool operator == (const Usuario &); //Sobrecarga do operador "==".
 
 	//funções get e set
-	void setNome(const string &nome) {
-		this->nome = Usuario::validaNome(nome);
-	}
+	void setNome(const string &);
 
-	void setIdade(const int idade) {
-		this->idade = Usuario::validaIdade(idade);
-	}
+	void setIdade(const int) ;
 
-	void setTelefone(const string &telefone) {
-		this->telefone = Usuario::validaTelefone(telefone);
-	}
+	void setTelefone(const string &);
 
-	void setEndereco(const string endereco) {
-		this->endereco = Usuario::validaEndereco(endereco);
-	}
+	void setEndereco(const string &);
 
-	void setRG(string rg) {
-		this->rg = Usuario::validaRG(rg);
-	}
+	void setRG(const string &);
 
-	void setCPF(string cpf) {
-		this->cpf = Usuario::validaCPF(cpf);
-	}
-	string getCPF() {
-		return this->cpf;
-	}
-	int setConta(Conta);
-	void setContas(Conta);
-	Conta * getContas() {
-		return this->contausuario;
-	}
-	int getNContas() {
-		return this->ncontas;
-	}
-	const int getQTDMAX() {
-		return this->QTDMAX;
-	}
+	void setCPF(const string &);
+	
+	string getCPF();
+	
+	int setConta(Conta &);
+	
+	Conta * getContas();
+	
+	int getNContas();
+	
+	const int getQTDMAX();
 
 	//funções de validação para cada atributo
 	int validaIdade(const int);

@@ -153,3 +153,21 @@ void Conta::imprimeHistorico(){
 			cout<<endl<<"     R$"<<this->historico[1][i-1]<<" ";
 	}
 }
+
+//funções get e set
+
+float Conta::getSaldo(){
+		return this->saldo;
+}
+
+void Conta::setSaldo(float saldo){
+	this->saldo = saldo;
+}
+
+int Conta::getNumero(){
+	return this->numero;
+}
+
+const float Conta::getTaxa(){
+	return Conta::TAXA;
+}

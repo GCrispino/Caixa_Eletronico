@@ -40,18 +40,10 @@ public:
 	Conta operator = (const Conta &);//Sobrecarga do operador "=" para atribuição.
 	bool operator == (const Conta &);
 	
-	float getSaldo(){
-		return this->saldo;
-	}
-	void setSaldo(float saldo){
-		this->saldo = saldo;
-	}
-	int getNumero(){
-		return this->numero;
-	}
-	static const float getTaxa(){
-		return TAXA;
-	}
+	float getSaldo();
+	void setSaldo(float saldo);
+	int getNumero();
+	static const float getTaxa();
 	
 	void info(); //mostra as informações da conta.
 	bool verificaSenha(const string &); //verifica se a senha dada é a senha da conta.

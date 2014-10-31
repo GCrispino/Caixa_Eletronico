@@ -153,7 +153,7 @@ void Usuario::imprimeContas(){
 	}
 }
 
-int Usuario::setConta(Conta conta){
+int Usuario::setConta(Conta &conta){
 	if (conta.getNumero() < 0){
 		cout<< "\nValor invalido!";
 		getch();
@@ -211,4 +211,45 @@ int Usuario::buscaConta(int nconta){
 			return i;
 		
 	return -1;
+}
+
+//funções get e set
+void Usuario::setNome(const string &nome) {
+	this->nome = Usuario::validaNome(nome);
+}
+
+void Usuario::setIdade(const int idade) {
+	this->idade = Usuario::validaIdade(idade);
+}
+
+void Usuario::setTelefone(const string &telefone) {
+	this->telefone = Usuario::validaTelefone(telefone);
+}
+
+void Usuario::setEndereco(const string &endereco) {
+	this->endereco = Usuario::validaEndereco(endereco);
+}
+
+void Usuario::setRG(const string &rg) {
+	this->rg = Usuario::validaRG(rg);
+}
+
+void Usuario::setCPF(const string &cpf) {
+	this->cpf = Usuario::validaCPF(cpf);
+}
+
+string Usuario::getCPF() {
+	return this->cpf;
+}
+
+Conta * Usuario::getContas() {
+	return this->contausuario;
+}
+
+int Usuario::getNContas(){
+	return this->ncontas;
+}
+
+const int Usuario::getQTDMAX(){
+	return this->QTDMAX;
 }
