@@ -14,11 +14,11 @@ protected:
 	int id;
 	string nome;
 	
-	Usuario *u;
+	Usuario *userpadrao;
 	int nusuarios;
 	int ntotalcontas;
 	
-	const static Data d;
+	const static Data dataAtual;
 public:
 	Banco(string nome = "",int id = 123456);
 	Banco(Banco &b);
