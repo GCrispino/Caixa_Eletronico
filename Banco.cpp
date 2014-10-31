@@ -10,13 +10,16 @@ ostream &operator << (ostream &output,const Banco &b){
 	return output;
 }
 
-Banco::Banco(string nome,int id)
-:id(id)
-{
+Banco::Banco(string nome,int id){
 	if (stringDigitos(&nome))
 		this->nome = "";
 	else 
 		this->nome = nome;
+	
+	if (id < 0)//não permite a entrada de números negativos.
+		this->id = 12345;
+	else
+		this->id = id;		
 	
 	this->nusuarios = 0;
 	this->ntotalcontas = 0;
