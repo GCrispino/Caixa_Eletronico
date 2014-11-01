@@ -13,7 +13,14 @@ bool Caixa_Eletronico::operator == (const Caixa_Eletronico &c1)
 
 ostream &operator << (ostream &output,const Caixa_Eletronico &c)
 {
-	output << c.modelo << " (" << c.nome<<")";
+	output<<endl;
+	//output << c.modelo << " (" << c.nome<<")";
+	output<<"\n-- Informacoes gerais do caixa eletronico: \n";
+	output<<"\nModelo do caixa: "<<c.modelo;
+	output<<"\nNumero de contas do banco: "<<c.ntotalcontas<<".";
+	output<<"\nDinheiro disponivel no caixa: R$"<<c.dinheiro<<".";
+	
+	output<<endl;
 
 	return output;
 }
@@ -109,13 +116,4 @@ void Caixa_Eletronico::saque(const int conta)
 		getch();
 	}
 
-}
-
-
-void Caixa_Eletronico::info() const
-{
-	cout<<"\n-- Informacoes gerais do caixa eletronico: \n";
-	cout<<"\nModelo do caixa: "<<this->modelo;
-	cout<<"\nNumero de contas do banco: "<<this->ntotalcontas<<".";
-	cout<<"\nDinheiro disponivel no caixa: R$"<<this->dinheiro<<".";
 }

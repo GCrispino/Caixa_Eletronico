@@ -5,7 +5,11 @@
 const Data Banco::dataAtual(05,10,2014);
 
 ostream &operator << (ostream &output,const Banco &b){
-	output << b.nome << "(" << b.id << ").";
+	output<<endl<<"-- Informacoes do banco --";
+	output<<endl<<"- Nome do banco: "<<b.nome;
+	output<<endl<<"- ID do banco: "<<b.id;
+	output<<endl<<"- Numero de usuarios: "<<b.nusuarios;
+	output<<endl<<"- Numero total de contas: "<<b.ntotalcontas;
 	
 	return output;
 }

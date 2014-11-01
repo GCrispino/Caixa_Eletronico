@@ -51,7 +51,6 @@ public:
 	
 	
 	void saque(const int); //realiza uma operação de saque no caixa eletrônico.
-	void info() const; //imprime as informações do caixa na tela.
 };
 
 #endif // CAIXA_ELETRONICO_H

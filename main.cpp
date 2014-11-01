@@ -125,7 +125,7 @@ int main(int argc, char **argv)
 										}while(c.getUsuario()[i].getContas()[c.getUsuario()[i].buscaConta(nconta)].verificaSenha(senha) != true);
 										system("cls");
 										Caixa_Eletronico::mostrarData();
-										c.getUsuario()[i].getContas()[c.getUsuario()[i].buscaConta(nconta)].info();	//mostra as informacoes da conta dada, se ela existir.
+										cout<<c.getUsuario()[i].getContas()[c.getUsuario()[i].buscaConta(nconta)];	//mostra as informacoes da conta dada, se ela existir.
 										cout<<endl<<"Deseja visualizar o historico de operacoes recentes da conta(S ou N)?";
 										cin >> r;
 										r = toupper(r);
@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 									//Mostra as informações do usuário.
 									system("cls");
 									Caixa_Eletronico::mostrarData();
-									c.getUsuario()[c.buscaCPF(cpf)].info(); 
+									cout<<c.getUsuario()[c.buscaCPF(cpf)]; 
 									getch();
 									cout<<endl<<"Deseja visualizar os numeros das contas desse usuario(S ou N)?";
 									cin >> r;
@@ -172,11 +172,13 @@ int main(int argc, char **argv)
 						case 3:
 							system("cls");
 							Caixa_Eletronico::mostrarData();
-							c.info();
+							cout<<c;
 							getch();
 							break;
 						case 4:
 							break;
+						default:
+							cout<<endl<<"Opcao invalida!";
 					}
 				}while (opcao3 != 4);
 				

@@ -6,7 +6,14 @@
 const int Usuario::QTDMAX = 3; //inicialização da variável const static 'QTDMAX'.
 
 ostream &operator << (ostream &output, const Usuario &u){
-	output << u.nome << "(" << u.cpf << ")";
+	output<<endl<<"--Informacoes do usuario: ";
+	output<<endl<<"  - Nome: "<<u.nome<<".";
+	output<<endl<<"  - Idade: "<<u.idade<<".";
+	output<<endl<<"  - Telefone: "<<u.telefone<<".";
+	output<<endl<<"  - Endereco: "<<u.endereco<<".";
+	output<<endl<<"  - RG: "<<u.rg<<".";
+	output<<endl<<"  - CPF: "<<u.cpf<<".";
+	output<<endl<<"  - Numero de contas do usuario: "<<u.ncontas<<".";
 	
 	return output;
 }
@@ -136,16 +143,6 @@ string Usuario::validaCPF(const string &cpf){
 		return "00000000000";
 }
 
-void Usuario::info(){
-	cout<<endl<<"--Informacoes do usuario: ";
-	cout<<endl<<"  - Nome: "<<this->nome<<".";
-	cout<<endl<<"  - Idade: "<<this->idade<<".";
-	cout<<endl<<"  - Telefone: "<<this->telefone<<".";
-	cout<<endl<<"  - Endereco: "<<this->endereco<<".";
-	cout<<endl<<"  - RG: "<<this->rg<<".";
-	cout<<endl<<"  - CPF: "<<this->cpf<<".";
-	cout<<endl<<"  - Numero de contas do usuario: "<<this->ncontas<<".";
-}
 
 void Usuario::incrementaNContas(){
 	this->ncontas = this->ncontas + 1;

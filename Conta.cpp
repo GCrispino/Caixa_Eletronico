@@ -8,7 +8,10 @@ using namespace std;
 const float Conta::TAXA = 3.5; //declaração da variável const static 'taxa'.
 
 ostream &operator << (ostream &output,const Conta &c){
-	output << c.numero;
+	output<<endl<<"-- Informacoes da conta: ";
+	output<<endl<<" - Numero da conta: "<<c.numero<<".";
+	
+	output<<endl<<"Saldo disponivel: R$"<<c.saldo<<".";
 	
 	return output;
 }
@@ -94,16 +97,6 @@ Conta Conta::operator =(const Conta &c){
 
 bool Conta::operator ==(const Conta &c){
 	return (this->numero == c.numero && this->senha == c.senha && this->saldo == c.saldo);
-}
-
-void Conta::info(){
-	cout<<endl<<"-- Informacoes da conta: ";
-	cout<<endl<<" - Numero da conta: "<<this->numero<<".";
-	//cout<<endl<<"Nome do proprietario: "<<this->u<<".";
-	//this->u.imprimeUsuario();
-	//cout<<".";
-	
-	cout<<endl<<"Saldo disponivel: R$"<<this->saldo<<".";
 }
 
 bool Conta::verificaSenha(const string &senha){

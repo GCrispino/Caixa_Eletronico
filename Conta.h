@@ -45,7 +45,6 @@ public:
 	int getNumero();
 	static const float getTaxa();
 	
-	void info(); //mostra as informações da conta.
 	bool verificaSenha(const string &); //verifica se a senha dada é a senha da conta.
 	void registraOperacao(int tipo,float valor); //registra uma operação na matriz(array de ponteiros) 'historico'.
 	void imprimeHistorico();//imprime o histórico de operações da conta.
