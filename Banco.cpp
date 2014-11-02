@@ -122,19 +122,14 @@ void Banco::setUsuario(const Usuario &u){
 	}
 }
 
-Usuario* Banco::getUsuario()
-{
-	return this->userpadrao;
-}
-
-void Banco::info() const{
+/*void Banco::info() const{
 	
 	cout<<endl<<"-- Informacoes do banco --";
 	cout<<endl<<"- Nome do banco: "<<this->nome;
 	cout<<endl<<"- ID do banco: "<<this->id;
 	cout<<endl<<"- Numero de usuarios: "<<this->nusuarios;
 	cout<<endl<<"- Numero total de contas: "<<this->ntotalcontas;
-}
+}*/
 
 void Banco::registrarUsuario(const string &cpf){
 	string nome,telefone,endereco,rg,senha;
@@ -195,7 +190,8 @@ int Banco::registrarConta(Usuario &u){
 	string senha;
 	int numero;
 	float saldo;
-	bool achouconta;
+	//bool achouconta;
+	const Conta *contabusca;
 	
 	if (u.getNContas() == u.getQTDMAX()){
 		cout<<endl<<"Numero maximo de contas por usuario ja alcancado!";
@@ -205,24 +201,17 @@ int Banco::registrarConta(Usuario &u){
 
 	cout<<endl<<"Informacoes da conta: ";
 	do{
-		achouconta = false;
+		//achouconta = false;
 		cout<<endl<<"Numero da conta: ";
 		cin >> numero;
-			for (int i = 0;i < this->getNUsuarios();i++){
-				if (this->getUsuario()[i].buscaConta(numero) != -1){
-				//cout<<endl<<"Conta informada nao encontrada!";
-					achouconta = true;
-					break;
-				}
-			}
-			if (achouconta){
+		contabusca = this->buscaConta(numero);
+		
+			if (contabusca != 0){
 				cout<<endl<<"Conta informada ja existe!";
 				getch();
 				cout<<endl<<"Entre com outro numero: ";
 			}
-			//if (u.buscaConta(numero) != -1)
-			//	cout<<endl<<"Conta ja existe!";
-	}while(achouconta == true);
+	}while(contabusca != 0);
 			
 	cout<<endl<<"Senha: ";
 	cin >> senha;
@@ -238,24 +227,19 @@ int Banco::registrarConta(Usuario &u){
 
 void Banco::pagamento(const int conta)
 {
-	int iconta1 = -1, iconta2 = iconta1, iusuario1 = -1, iusuario2 = -1,nconta,achou = 0;
+	int nconta;
 	string senha;
 	bool achousenha = false;
+	const Conta * contabusca = this->buscaConta(conta);
 	
-	
-	for (int i = 0; i < this->getNUsuarios(); i++) //busca a conta que realizará o pagamento.
-		for (int j = 0; j < this->userpadrao[i].getNContas(); j++)
-		if (this->userpadrao[i].getContas()[j].getNumero() == conta) {
-			iusuario1 = i;
-			iconta1 = j;
-			achou = 1;
+	if (contabusca != 0) {
 
-			cout<<endl<<"Digite a sua senha: ";
-			cin >> senha;
-			if (this->userpadrao[i].getContas()[j].verificaSenha(senha))
-				achousenha = true;
-		}
-	if (achou == 0) {
+		cout<<endl<<"Digite a sua senha: ";
+		cin >> senha;
+		if (contabusca->verificaSenha(senha))
+			achousenha = true;
+	}
+	if (contabusca == 0) {
 		cout<<"\nConta nao encontrada!";
 		getch();
 		return ;
@@ -263,18 +247,16 @@ void Banco::pagamento(const int conta)
 
 		float valor;
 
-		cout<<"\nDigite o numero da conta que recebera o pagamento: ";
-		cin >> nconta;
+		do{
+			cout<<"\nDigite o numero da conta que recebera o pagamento: ";
+			cin >> nconta;
+				if (nconta == conta)
+					cout<<endl<<"Valor invalido!";
+		}while(nconta == conta);
 
-		achou = 0;
-		for (int i = 0; i < this->getNUsuarios(); i++) //Procura o numero da conta que recebera o pagamento
-			for (int j = 0; j < this->userpadrao[i].getNContas(); j++)
-				if (this->userpadrao[i].getContas()[j].getNumero() == nconta) {
-					iusuario2 = i;
-					iconta2 = j;
-					achou = 1;
-				}
-			if (achou == 0) {
+		const Conta *contabusca2 = this->buscaConta(nconta);
+		
+			if (contabusca2 == 0) {
 				cout<<"\nConta nao encontrada! ";
 				getch();
 				return ;
@@ -282,25 +264,25 @@ void Banco::pagamento(const int conta)
 				do { //laço "do - while()" para validar o valor do pagamento.
 					cout<<"\nDigite o valor do pagamento: ";
 					cin >> valor;
-					if (valor > this->userpadrao[iusuario1].getContas()[iconta1].getSaldo()) {   //Não permite a inserção de dados maiores que o saldo da conta informada...
+					if (valor > contabusca2->getSaldo()) {   //Não permite a inserção de dados maiores que o saldo da conta informada...
 						cout << "\nValor maior que o saldo!";
 						getch();
 					} else if (valor <= 0) {				//...nem a inserção de dados menores ou igual a 0.
 						cout << "\nValor invalido!!";
 						getch();
 					} else {								//A condição é aceita e o pagamento ocorre normalmente.
-						this->userpadrao[iusuario1].getContas()[iconta1].setSaldo(this->userpadrao[iusuario1].getContas()[iconta1].getSaldo() - valor - Conta::getTaxa());
-						this->userpadrao[iusuario2].getContas()[iconta2].setSaldo(this->userpadrao[iusuario2].getContas()[iconta2].getSaldo() + valor);
-						this->userpadrao[iusuario1].getContas()[iconta1].registraOperacao(1,valor);
+						const_cast<Conta &>(*contabusca).setSaldo(contabusca->getSaldo() - valor - Conta::getTaxa());
+						const_cast<Conta &>(*contabusca2).setSaldo(contabusca2->getSaldo() + valor);
+						const_cast<Conta &>(*contabusca).registraOperacao(1,valor);
 
 						cout<<"\nO pagamento no valor de R$"<<valor<<" foi feito.";
-						mostrarSaldo(this->userpadrao[iusuario1].getContas()[iconta1].getNumero());
-						mostrarSaldo(this->userpadrao[iusuario2].getContas()[iconta2].getNumero());
+						mostrarSaldo(contabusca->getNumero());
+						mostrarSaldo(contabusca2->getNumero());
 						getch();
 						break;
 					}
 
-				} while (valor < 0 || valor > this->userpadrao[iusuario1].getContas()[iconta1].getSaldo());
+				} while (valor < 0 || valor > contabusca->getSaldo());
 			}
 		} else {
 			cout<<endl<<"Senha invalida!";
@@ -310,20 +292,16 @@ void Banco::pagamento(const int conta)
 
 void Banco::saque(const int conta)
 {
-	int iconta = -1,iusuario = -1,achou = 0;
+	int achou = 0;
 	string senha;
 	bool achousenha = false;
-
-	for (int i = 0; i < this->getNUsuarios(); i++) //Procura o numero da conta recebido no vetor de contas.
-		for (int j = 0; j < this->userpadrao[i].getNContas(); j++)
-			if (this->userpadrao[i].getContas()[j].getNumero() == conta) {
-				iusuario = i;
-				iconta = j;
-				achou = 1;
+	const Conta * contabusca = this->buscaConta(conta);
+	
+			if (contabusca->getNumero() == conta) {
 
 				cout<<endl<<"Digite a sua senha: ";
 				cin >> senha;
-				if (this->userpadrao[i].getContas()[j].verificaSenha(senha))
+				if (contabusca->verificaSenha(senha))
 					achousenha = true;
 			}
 	if (achou == 0) {
@@ -335,7 +313,7 @@ void Banco::saque(const int conta)
 
 		cout<<"\nDigite o valor a ser sacado: ";
 		cin >> valor;
-		if (valor > this->userpadrao[iusuario].getContas()[iconta].getSaldo()) {   //Não permite a inserção de dados maiores que o saldo da conta informada...
+		if (valor > contabusca->getSaldo()) {   //Não permite a inserção de dados maiores que o saldo da conta informada...
 			cout << "\nSaldo insuficiente!";
 			getch();
 			return ;
@@ -344,11 +322,11 @@ void Banco::saque(const int conta)
 			getch();
 			return ;
 		} else {								//A condição é aceita e o saque ocorre normalmente.
-			this->userpadrao[iusuario].getContas()[iconta].setSaldo(this->userpadrao[iusuario].getContas()[iconta].getSaldo() - valor);
-			this->userpadrao[iusuario].getContas()[iconta].registraOperacao(0,valor);
+			const_cast<Conta &>(*contabusca).setSaldo(contabusca->getSaldo() - valor);
+			const_cast<Conta &>(*contabusca).registraOperacao(0,valor);
 
 			cout<<"\nO valor de R$"<<valor<<" foi sacado.";
-			cout<<"\nSaldo restante: R$"<<this->userpadrao[iusuario].getContas()[iconta].getSaldo()<<".";
+			cout<<"\nSaldo restante: R$"<<contabusca->getSaldo()<<".";
 			getch();
 		}
 	} else {
@@ -358,12 +336,11 @@ void Banco::saque(const int conta)
 
 }
 
-void Banco::mostrarSaldo(const int conta) const
+void Banco::mostrarSaldo(const int nconta) const
 {
-	for (int i = 0; i < this->nusuarios; i++)
-		for (int j = 0; j < this->userpadrao[i].getNContas(); j++)
-			if (this->userpadrao[i].getContas()[j].getNumero() == conta)
-				cout<<"\nO saldo da conta "<<(this->userpadrao[i].getContas()[j].getNumero())<<" e' de: R$"<<(this->userpadrao[i].getContas()[j].getSaldo());
+	const Conta * conta = const_cast<Banco*>(this)->buscaConta(nconta);
+	
+	cout<<"\nO saldo da conta "<<conta->getNumero()<<" e' de: R$"<<conta->getSaldo();
 }
 
 void Banco::incrementaNContas(){
@@ -376,12 +353,22 @@ void Banco::mostrarData()
 	Banco::dataAtual.print();
 }
 
-int Banco::buscaCPF(const string &cpf)
+const Conta * Banco::buscaConta(const int nconta){
+	const Conta *c = 0;
+	
+	for (int i = 0;i < this->nusuarios;i++)
+		if (this->userpadrao[i].buscaConta(nconta) != 0)
+			c = userpadrao[i].buscaConta(nconta);
+			
+	return c;
+}
+
+const Usuario * Banco::buscaCPF(const string &cpf)
 {
 
 	for (int i = 0; i < this->nusuarios; i++)
 		if (this->userpadrao[i].getCPF() == cpf)
-			return i;
+			return &userpadrao[i];
 
-	return -1;
+	return 0;
 }

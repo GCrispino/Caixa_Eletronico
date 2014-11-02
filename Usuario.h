@@ -52,8 +52,6 @@ public:
 	
 	int setConta(Conta &);
 	
-	Conta * getContas();
-	
 	int getNContas();
 	
 	const int getQTDMAX();
@@ -67,9 +65,9 @@ public:
 	string validaCPF(const string &);
 	
 	
-	int buscaConta(const int); //faz uma busca de um numero de uma conta em um usuário
+	const Conta * buscaConta(const int); //faz uma busca de um numero de uma conta em um usuário
 	inline void incrementaNContas(); //incrementa o atributo "ncontas".
-	void imprimeContas();//imprime as contas pertencentes a um determinado usuário.
+	void imprimeContas() const;//imprime as contas pertencentes a um determinado usuário.
 
 
 };

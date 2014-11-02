@@ -148,9 +148,9 @@ void Usuario::incrementaNContas(){
 	this->ncontas = this->ncontas + 1;
 }
 
-void Usuario::imprimeContas(){
+void Usuario::imprimeContas() const{
 	for (int i = 0;i < this->ncontas;i++){
-		cout<<endl<<"Numero da conta: "<<this->contausuario[i]<<".";
+		cout<<endl<<this->contausuario[i];
 		getch();
 	}
 }
@@ -203,16 +203,16 @@ int Usuario::setConta(Conta &conta){
 	}
 }
 
-int Usuario::buscaConta(int nconta){
+const Conta * Usuario::buscaConta(const int nconta){
 	
 	if (this->ncontas == 0)
-		return -1;
+		return 0;
 	
 	for (int i = 0; i < this->ncontas;i++)
 		if (this->contausuario[i].getNumero() == nconta)
-			return i;
+			return &contausuario[i];
 		
-	return -1;
+	return 0;
 }
 
 //funções get e set
@@ -242,10 +242,6 @@ void Usuario::setCPF(const string &cpf) {
 
 string Usuario::getCPF() {
 	return this->cpf;
-}
-
-Conta * Usuario::getContas() {
-	return this->contausuario;
 }
 
 int Usuario::getNContas(){

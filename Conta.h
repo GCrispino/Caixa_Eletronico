@@ -40,14 +40,14 @@ public:
 	Conta operator = (const Conta &);//Sobrecarga do operador "=" para atribuição.
 	bool operator == (const Conta &);
 	
-	float getSaldo();
+	float getSaldo() const;
 	void setSaldo(float saldo);
-	int getNumero();
+	int getNumero() const;
 	static const float getTaxa();
 	
-	bool verificaSenha(const string &); //verifica se a senha dada é a senha da conta.
+	bool verificaSenha(const string &) const; //verifica se a senha dada é a senha da conta.
 	void registraOperacao(int tipo,float valor); //registra uma operação na matriz(array de ponteiros) 'historico'.
-	void imprimeHistorico();//imprime o histórico de operações da conta.
+	void imprimeHistorico() const;//imprime o histórico de operações da conta.
 	
 	//Função auxiliar utilizada para verifica se uma string dada é formada por números, para validar os atributos nome e senha.
 };

@@ -12,14 +12,14 @@
   * ERROS A SEREM CORRIGIDOS: 
   * - Nomes genéricos: -CORRIGIDO!
   * - sobrecarregado o operador da classe data - CORRIGIDO PREVIAMENTE
-  * - evitar retornar vetores.
+  * - evitar retornar vetores. - CORRIGIDO
   * - "const string &" - consertar.-CORRIGIDO!
   * - validação de dados na classe banco - CORRIGIDO
   * - 3 construtores - CORRIGIDO
   * - função inline - CORRIGIDO
   * - método com passagem por referência usando ponteiro -CORRIGIDO
   * - Sobrecarga de operador "=" tem vazamento de memória - CORRIGIDO
-  * - Operator friend << incompleto
+  * - Operator friend << incompleto - CORRIGIDO
   */
 #ifndef CAIXA_ELETRONICO_H
 #define CAIXA_ELETRONICO_H

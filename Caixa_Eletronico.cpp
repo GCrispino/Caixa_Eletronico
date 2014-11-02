@@ -64,23 +64,19 @@ Caixa_Eletronico::~Caixa_Eletronico()
 
 void Caixa_Eletronico::saque(const int conta)
 {
-	int iconta = -1,iusuario = -1,achou = 0;
+	//int iconta = -1,iusuario = -1,achou = 0;
 	string senha;
 	bool achousenha = false;
+	const Conta * contabusca = this->buscaConta(conta);
+	
+	if (contabusca->getNumero() == conta) {
 
-	for (int i = 0; i < this->getNUsuarios(); i++) //Procura o numero da conta recebido no vetor de contas.
-		for (int j = 0; j < this->userpadrao[i].getNContas(); j++)
-			if (this->userpadrao[i].getContas()[j].getNumero() == conta) {
-				iusuario = i;
-				iconta = j;
-				achou = 1;
-
-				cout<<endl<<"Digite a sua senha: ";
-				cin >> senha;
-				if (this->userpadrao[i].getContas()[j].verificaSenha(senha))
-					achousenha = true;
-			}
-	if (achou == 0) {
+		cout<<endl<<"Digite a sua senha: ";
+		cin >> senha;
+		if (contabusca->verificaSenha(senha))
+			achousenha = true;
+	}
+	if (contabusca == 0) {
 		cout<<"\nConta nao encontrada!";
 		getch();
 		return ;
@@ -89,7 +85,7 @@ void Caixa_Eletronico::saque(const int conta)
 
 		cout<<"\nDigite o valor a ser sacado: ";
 		cin >> valor;
-		if (valor > this->userpadrao[iusuario].getContas()[iconta].getSaldo()) {   //Não permite a inserção de dados maiores que o saldo da conta informada...
+		if (valor > contabusca->getSaldo()) {   //Não permite a inserção de dados maiores que o saldo da conta informada...
 			cout << "\nSaldo insuficiente!";
 			getch();
 			return ;
@@ -102,12 +98,12 @@ void Caixa_Eletronico::saque(const int conta)
 			getch();
 			return ;
 		} else {								//A condição é aceita e o saque ocorre normalmente.
-			this->userpadrao[iusuario].getContas()[iconta].setSaldo(this->userpadrao[iusuario].getContas()[iconta].getSaldo() - valor);
+			const_cast<Conta &>(*contabusca).setSaldo(contabusca->getSaldo() - valor);
 			this->dinheiro -= valor;
-			this->userpadrao[iusuario].getContas()[iconta].registraOperacao(0,valor);
+			const_cast<Conta &>(*contabusca).registraOperacao(0,valor);
 
 			cout<<"\nO valor de R$"<<valor<<" foi sacado.";
-			cout<<"\nSaldo restante: R$"<<this->userpadrao[iusuario].getContas()[iconta].getSaldo()<<".";
+			cout<<"\nSaldo restante: R$"<<contabusca->getSaldo()<<".";
 			cout<<"\nDinheiro restante no caixa: R$"<<this->dinheiro<<".";
 			getch();
 		}

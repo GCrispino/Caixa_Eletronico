@@ -99,7 +99,7 @@ bool Conta::operator ==(const Conta &c){
 	return (this->numero == c.numero && this->senha == c.senha && this->saldo == c.saldo);
 }
 
-bool Conta::verificaSenha(const string &senha){
+bool Conta::verificaSenha(const string &senha) const{
 	return (this->senha == senha);
 }
 
@@ -123,7 +123,7 @@ void Conta::registraOperacao(int tipo, float valor){
 	delete [] aux;
 }
 
-void Conta::imprimeHistorico(){
+void Conta::imprimeHistorico() const {
 	
 	cout<<endl<<"Historico: ";
 	
@@ -154,7 +154,7 @@ void Conta::imprimeHistorico(){
 
 //funções get e set
 
-float Conta::getSaldo(){
+float Conta::getSaldo() const{
 		return this->saldo;
 }
 
@@ -162,7 +162,7 @@ void Conta::setSaldo(float saldo){
 	this->saldo = saldo;
 }
 
-int Conta::getNumero(){
+int Conta::getNumero() const{
 	return this->numero;
 }
 
