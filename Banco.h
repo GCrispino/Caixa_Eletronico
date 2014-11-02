@@ -34,8 +34,6 @@ public:
 	void setUsuario(const Usuario &u);
 	
 	
-	//void info() const;
-	
 	void registrarUsuario(const string &); //Registra um usuário novo no Caixa.
 	int registrarConta(Usuario &); //Registra uma conta nova no usuário passado como parâmetro.
 	const Conta * buscaConta(const int); //busca uma conta em todos os usuários.

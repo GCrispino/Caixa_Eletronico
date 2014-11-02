@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 	Conta conta;
 	Caixa_Eletronico c(2000,"Caixa1"); //Dinheiro disponível no caixa e seu modelo definidos na declaração do objeto.
 	Caixa_Eletronico c2(c);
+	Data data(31);
 	
 	cout << "\n---Caixa eletronico---: ";
 	cout << "\nPressione qualquer tecla para continuar: ";

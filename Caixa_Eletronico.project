@@ -104,6 +104,8 @@
     <File Name="Banco.cpp"/>
     <File Name="stringDigitos.h"/>
     <File Name="stringDigitos.cpp"/>
+    <File Name="Device.h"/>
+    <File Name="Device.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

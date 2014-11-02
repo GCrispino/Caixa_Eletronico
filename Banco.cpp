@@ -122,15 +122,6 @@ void Banco::setUsuario(const Usuario &u){
 	}
 }
 
-/*void Banco::info() const{
-	
-	cout<<endl<<"-- Informacoes do banco --";
-	cout<<endl<<"- Nome do banco: "<<this->nome;
-	cout<<endl<<"- ID do banco: "<<this->id;
-	cout<<endl<<"- Numero de usuarios: "<<this->nusuarios;
-	cout<<endl<<"- Numero total de contas: "<<this->ntotalcontas;
-}*/
-
 void Banco::registrarUsuario(const string &cpf){
 	string nome,telefone,endereco,rg,senha;
 	int idade;
