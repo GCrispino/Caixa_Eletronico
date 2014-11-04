@@ -106,6 +106,12 @@
     <File Name="stringDigitos.cpp"/>
     <File Name="Device.h"/>
     <File Name="Device.cpp"/>
+    <File Name="Caixa_BB.h"/>
+    <File Name="Caixa_BB.cpp"/>
+    <File Name="Caixa_CxEconomica.h"/>
+    <File Name="Caixa_CxEconomica.cpp"/>
+    <File Name="Caixa_Bradesco.h"/>
+    <File Name="Caixa_Bradesco.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

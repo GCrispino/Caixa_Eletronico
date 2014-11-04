@@ -18,9 +18,11 @@ bool Caixa_Eletronico::operator == (const Caixa_Eletronico &c1)
 
 ostream &operator << (ostream &output,const Caixa_Eletronico &c)
 {
+	Device *dptr = new Caixa_Eletronico(c);
+	
 	output<<endl;
 	output<<"\n-- Informacoes gerais do caixa eletronico: \n";
-	cout<<(Device)c;
+	cout<<*dptr;
 	output<<"\nDinheiro disponivel no caixa: R$"<<c.dinheiro<<".";
 	output<<endl<<"Numero de usuarios cadastrados: "<<c.nusuarios<<" .";
 	output<<endl<<"Numero total de contas cadastradas: "<<c.ntotalcontas<<" .";

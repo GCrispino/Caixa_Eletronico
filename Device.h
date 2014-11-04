@@ -30,14 +30,16 @@ protected:
 public:
 	Device(int serial = 0, string modelo = "",Data = Data(),string senha = "123456"); //Construtor default
 	Device(const Device &); //Construtor de cópia
-	~Device(); //destrutor
+	virtual ~Device(); //destrutor
 
-	Device operator =(const Device &); //sobrecarga do operador "="
+	//const Device &operator =(const Device &); //sobrecarga do operador "="
 	
 	void setDatasManutencao(const Data &);
 	
-	void imprimeDatasManutencao();//Imprime as datas em que o dispositivo sofreu manutenção.
+	virtual void imprimeDatasManutencao() ;//Imprime as datas em que o dispositivo sofreu manutenção.
 	bool verificaSenha(const string &); //verifica a senha de administrador.
+	
+	virtual void ligar() = 0;
 };
 
 #endif // DEVICE_H

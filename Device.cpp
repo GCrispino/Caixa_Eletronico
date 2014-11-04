@@ -62,7 +62,7 @@ Device::~Device()
 }
 
 
-Device Device::operator =(const Device &d){
+/*const Device & Device::operator =(const Device &d){
 	this->serial = d.serial;
 	this->modelo = d.modelo;
 	this->senhaadm = d.senhaadm;
@@ -87,8 +87,8 @@ Device Device::operator =(const Device &d){
 			this->datasmanutencao[i] = d.datasmanutencao[i];
 	}
 	
-	return *this;
-}
+	return &(*this);
+}*/
 
 void Device::setDatasManutencao(const Data &d){
 	Data * aux;

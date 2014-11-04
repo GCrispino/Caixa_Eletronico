@@ -72,6 +72,8 @@ public:
 	void mostrarSaldo(const int) const; //imprime o saldo disponível na conta na tela.
 	void incrementaNContas();
 	static void mostrarData();//imprime a data na tela.
+	
+	virtual void ligar() = 0;
 };
 
 #endif // CAIXA_ELETRONICO_H

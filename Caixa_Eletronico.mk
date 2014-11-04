@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Crispino
-Date                   :=11/03/14
+Date                   :=11/04/14
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=C:/MinGW-4.8.1/bin/g++.exe 
 SharedObjectLinkerName :=C:/MinGW-4.8.1/bin/g++.exe -shared -fPIC
@@ -63,7 +63,8 @@ AS       := C:/MinGW-4.8.1/bin/as.exe
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Caixa_Eletronico.cpp$(ObjectSuffix) $(IntermediateDirectory)/Data.cpp$(ObjectSuffix) $(IntermediateDirectory)/Conta.cpp$(ObjectSuffix) $(IntermediateDirectory)/Usuario.cpp$(ObjectSuffix) $(IntermediateDirectory)/Banco.cpp$(ObjectSuffix) $(IntermediateDirectory)/stringDigitos.cpp$(ObjectSuffix) $(IntermediateDirectory)/Device.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Caixa_Eletronico.cpp$(ObjectSuffix) $(IntermediateDirectory)/Data.cpp$(ObjectSuffix) $(IntermediateDirectory)/Conta.cpp$(ObjectSuffix) $(IntermediateDirectory)/Usuario.cpp$(ObjectSuffix) $(IntermediateDirectory)/Banco.cpp$(ObjectSuffix) $(IntermediateDirectory)/stringDigitos.cpp$(ObjectSuffix) $(IntermediateDirectory)/Device.cpp$(ObjectSuffix) $(IntermediateDirectory)/Caixa_BB.cpp$(ObjectSuffix) $(IntermediateDirectory)/Caixa_CxEconomica.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/Caixa_Bradesco.cpp$(ObjectSuffix) 
 
 
 
@@ -153,6 +154,30 @@ $(IntermediateDirectory)/Device.cpp$(DependSuffix): Device.cpp
 
 $(IntermediateDirectory)/Device.cpp$(PreprocessSuffix): Device.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Device.cpp$(PreprocessSuffix) "Device.cpp"
+
+$(IntermediateDirectory)/Caixa_BB.cpp$(ObjectSuffix): Caixa_BB.cpp $(IntermediateDirectory)/Caixa_BB.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/Caixa_Eletronico/Caixa_BB.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Caixa_BB.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Caixa_BB.cpp$(DependSuffix): Caixa_BB.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Caixa_BB.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Caixa_BB.cpp$(DependSuffix) -MM "Caixa_BB.cpp"
+
+$(IntermediateDirectory)/Caixa_BB.cpp$(PreprocessSuffix): Caixa_BB.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Caixa_BB.cpp$(PreprocessSuffix) "Caixa_BB.cpp"
+
+$(IntermediateDirectory)/Caixa_CxEconomica.cpp$(ObjectSuffix): Caixa_CxEconomica.cpp $(IntermediateDirectory)/Caixa_CxEconomica.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/Caixa_Eletronico/Caixa_CxEconomica.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Caixa_CxEconomica.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Caixa_CxEconomica.cpp$(DependSuffix): Caixa_CxEconomica.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Caixa_CxEconomica.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Caixa_CxEconomica.cpp$(DependSuffix) -MM "Caixa_CxEconomica.cpp"
+
+$(IntermediateDirectory)/Caixa_CxEconomica.cpp$(PreprocessSuffix): Caixa_CxEconomica.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Caixa_CxEconomica.cpp$(PreprocessSuffix) "Caixa_CxEconomica.cpp"
+
+$(IntermediateDirectory)/Caixa_Bradesco.cpp$(ObjectSuffix): Caixa_Bradesco.cpp $(IntermediateDirectory)/Caixa_Bradesco.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Crispino/Documents/ProgII/Caixa_Eletronico/Caixa_Bradesco.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Caixa_Bradesco.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Caixa_Bradesco.cpp$(DependSuffix): Caixa_Bradesco.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Caixa_Bradesco.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Caixa_Bradesco.cpp$(DependSuffix) -MM "Caixa_Bradesco.cpp"
+
+$(IntermediateDirectory)/Caixa_Bradesco.cpp$(PreprocessSuffix): Caixa_Bradesco.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Caixa_Bradesco.cpp$(PreprocessSuffix) "Caixa_Bradesco.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
