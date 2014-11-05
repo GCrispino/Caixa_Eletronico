@@ -45,7 +45,8 @@ protected:
 	const static Data dataAtual; //Data atual
 	
 public:
-	Caixa_Eletronico(const string &modelo = "",float dinheiro = 0,int serial = 0,Data = Data(),string senhaadm = "123456"); //Construtor default que inicializa as variaveis dinheiro e modelo.
+	Caixa_Eletronico(const string &modelo,float dinheiro = 0,int serial = 0,Data = Data(),string senhaadm = "123456"); //Construtor default que inicializa as variaveis dinheiro e modelo.
+	Caixa_Eletronico();
 	//Construtor alternativo que define as variáveis modelo e serial e ja define automaticamente a variável dinheiro com o valor padrão 3000.
 	Caixa_Eletronico(const string &modelo);
 	Caixa_Eletronico(const Caixa_Eletronico &); //Construtor de cópia

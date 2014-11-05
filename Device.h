@@ -29,7 +29,8 @@ protected:
 	int ndatasmanutencao;//número de datas de manutenção.
 	bool ligado; //indica se o device está ligado ou não.
 public:
-	Device(int serial = 0, string modelo = "",Data = Data(),string senha = "123456"); //Construtor default
+	Device(int serial, string modelo = "",Data = Data(),string senha = "123456"); //Construtor default
+	Device();
 	Device(const Device &); //Construtor de cópia
 	virtual ~Device(); //destrutor
 

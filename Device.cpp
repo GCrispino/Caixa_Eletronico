@@ -12,10 +12,12 @@ ostream &operator <<(ostream &output,const Device &d){
 }
 
 Device::Device(int serial, string modelo,Data datafabricacao,string senha)
-:serial(serial),modelo(modelo),senhaadm(senha)
+:modelo(modelo),senhaadm(senha)
 {
 	if (serial < 0)
 		this->serial = 0;
+	else
+		this->serial = serial;
 	
 	if (stringDigitos(&senha) && senha.size() == 6)
 		this->senhaadm = senha;
@@ -23,6 +25,16 @@ Device::Device(int serial, string modelo,Data datafabricacao,string senha)
 		this->senhaadm = "123456";	
 	
 	this->datafabricacao= datafabricacao;
+	this->datasmanutencao = 0;
+	this->ndatasmanutencao = 0;
+}
+
+Device::Device(){
+	this->serial = 123123;
+	this->modelo = "Device1";
+	this->senhaadm = "123456";	
+	
+	this->datafabricacao= Data(1,1,2001);
 	this->datasmanutencao = 0;
 	this->ndatasmanutencao = 0;
 }

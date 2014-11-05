@@ -44,8 +44,16 @@ Caixa_Eletronico::Caixa_Eletronico(const string &modelo, float dinheiro, int ser
 	this->userpadrao = 0;
 }
 
+Caixa_Eletronico::Caixa_Eletronico() : Device(){
+	
+	this->dinheiro = 2500;
+		
+	this->nusuarios = 0;
+	this->ntotalcontas = 0;
+	this->userpadrao = 0;
+}
+
 Caixa_Eletronico::Caixa_Eletronico(const string &modelo)
-//:modelo(modelo)
 {
 	this->dinheiro = 3000;
 	

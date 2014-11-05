@@ -330,7 +330,7 @@ void print(Caixa_Eletronico *cx){
 			cout<<*static_cast<Caixa_BB*>(cx);
 		else if (typeid(*cx) == typeid(Caixa_CxEconomica))
 			cout<<static_cast<Caixa_CxEconomica*>(cx);
-		if (typeid(*cx) == typeid(Caixa_Bradesco))
+		else if (typeid(*cx) == typeid(Caixa_Bradesco))
 			cout<<static_cast<Caixa_Bradesco*>(cx);
 	
 }
