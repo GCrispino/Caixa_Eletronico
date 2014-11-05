@@ -14,6 +14,7 @@ private:
 	const static string NOMEBANCO;
 public:
 	Caixa_CxEconomica(const string &modelo = "",float dinheiro = 0,int serial = 0,Data = Data(),string senhaadm = "123456");
+	Caixa_CxEconomica(const Caixa_CxEconomica &);
 	~Caixa_CxEconomica();
 
 

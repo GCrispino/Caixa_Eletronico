@@ -10,6 +10,8 @@ Caixa_Bradesco::Caixa_Bradesco(const string &modelo, float dinheiro, int serial,
 {
 }
 
+Caixa_Bradesco::Caixa_Bradesco(const Caixa_Bradesco &cb) : Caixa_Eletronico(cb){}
+
 Caixa_Bradesco::~Caixa_Bradesco()
 {
 }

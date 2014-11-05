@@ -17,7 +17,7 @@ void MenuCaixaEletronico(); //Menu do caixa eletrônico do programa
 void MenuOperacao(); //Menu aberto quando se escolhe a opção de realizar uma operação no menu principal.
 void MenuInformacoes(); //Menu que controla as operações de mostrar informações sobre determinada classe.
 
-void print(Caixa_Eletronico *);
+void print(Caixa_Eletronico *);// função que imprime informações de um caixa eletrônico em questão usando polimorfismo
 
 int main(int argc, char **argv)
 {

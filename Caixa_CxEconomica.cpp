@@ -10,6 +10,8 @@ Caixa_CxEconomica::Caixa_CxEconomica(const string &modelo, float dinheiro, int s
 {
 }
 
+ Caixa_CxEconomica::Caixa_CxEconomica(const Caixa_CxEconomica &cxe): Caixa_Eletronico(cxe){}
+
 Caixa_CxEconomica::~Caixa_CxEconomica()
 {
 }

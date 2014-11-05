@@ -14,6 +14,7 @@ private:
 	const static string NOMEBANCO;
 public:
 	Caixa_Bradesco(const string &modelo = "",float dinheiro = 0,int serial = 0,Data = Data(),string senhaadm = "123456");
+	Caixa_Bradesco(const Caixa_Bradesco &);
 	~Caixa_Bradesco();
 
 	void ligar();

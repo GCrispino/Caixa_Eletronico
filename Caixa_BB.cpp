@@ -6,7 +6,6 @@
 const string Caixa_BB::NOMEBANCO = "Banco do Brasil";
 
 ostream &operator << (ostream &output, const Caixa_BB &cx){
-	cout<<endl<<"Ola";
 	cout<<endl<<"Banco do caixa eletronico: "<<cx.NOMEBANCO<<".";
 	cout<<endl<<static_cast<const Caixa_Eletronico&>(cx);
 	
@@ -17,6 +16,9 @@ Caixa_BB::Caixa_BB(const string &modelo, float dinheiro, int serial,Data datafab
 :Caixa_Eletronico(modelo,dinheiro,serial,datafabricacao,senhaadm)
 {
 }
+
+Caixa_BB::Caixa_BB(const Caixa_BB &bb) 
+:Caixa_Eletronico(bb){}
 
 Caixa_BB::~Caixa_BB()
 {
