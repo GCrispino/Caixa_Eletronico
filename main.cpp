@@ -1,7 +1,6 @@
 #include <iostream>
 #include <typeinfo>
-
-using namespace std;
+#include <vector>
 
 #include <conio.h>
 #include <stdlib.h>
@@ -12,6 +11,8 @@ using namespace std;
 #include "Caixa_Bradesco.h"
 #include "stringDigitos.h"
 
+using namespace std;
+
 void Menu0(); //primeiro menu que aparece no programa
 void MenuCaixas(); //imprime as opções de caixa disponíveis.
 void MenuCaixaEletronico(); //Menu do caixa eletrônico do programa
@@ -19,6 +20,7 @@ void MenuOperacao(); //Menu aberto quando se escolhe a opção de realizar uma o
 void MenuInformacoes(); //Menu que controla as operações de mostrar informações sobre determinada classe.
 
 void print(Caixa_Eletronico *);// função que imprime informações de um caixa eletrônico em questão usando polimorfismo
+void desaloca(vector <Caixa_Eletronico*> &); //funcão que desaloca os ponteiros armazenados no vector de referências
 
 int main(int argc, char **argv)
 {
@@ -28,10 +30,20 @@ int main(int argc, char **argv)
 	char r;
 	string modelo,cpf,senha,senhaadm;
 	Conta conta;
-	Caixa_Eletronico *cprincipal,*csecundario;
-	Device *dprincipal;//new Caixa_Eletronico("Caixa1",3000,12345,Data(30,1,2010),"654321");
-	//Caixa_Eletronico c2(c);
-	//Device *ptrdispositivo = new Caixa_Eletronico(c);
+	Caixa_Eletronico *cprincipal = 0,*csecundario = 0;
+	Device *dprincipal = 0;
+	
+	Caixa_BB bb1,bb2;
+	Caixa_Bradesco bradesco1,bradesco2;
+	Caixa_CxEconomica cxeconomica1,cxeconomica2;
+	vector<Caixa_Eletronico*> ptrcaixa;
+	
+	ptrcaixa.push_back(&bb1);
+	ptrcaixa.push_back(&bb2);
+	ptrcaixa.push_back(&bradesco1);
+	ptrcaixa.push_back(&bradesco2);
+	ptrcaixa.push_back(&cxeconomica1);
+	ptrcaixa.push_back(&cxeconomica2);
 	
 	
 	do{
@@ -52,6 +64,7 @@ int main(int argc, char **argv)
 				break;
 			case 4:
 				cout<<endl<<"Programa encerrado!";
+				desaloca(ptrcaixa);
 				getch();
 				return 0;
 			default:
@@ -312,6 +325,16 @@ int main(int argc, char **argv)
 	}while(opcao0 != 3);
 	
 	getch();
+
+	if (cprincipal != 0)
+		delete cprincipal;
+	if (csecundario != 0)
+		delete csecundario;
+	if (dprincipal != 0)
+		delete dprincipal;
+		
+	desaloca(ptrcaixa);
+
 	return 0;
 }
 
@@ -365,5 +388,11 @@ void print(Caixa_Eletronico *cx){
 			cout<<*static_cast<Caixa_CxEconomica*>(cx);
 		else if (typeid(*cx) == typeid(Caixa_Bradesco))
 			cout<<*static_cast<Caixa_Bradesco*>(cx);
-	
+}
+
+void desaloca(vector<Caixa_Eletronico*> &ptrcaixa){
+	for (unsigned int i = 0;i < ptrcaixa.size();i++){
+		cout<<endl<<"Deletando objeto da classe "<<(typeid(*ptrcaixa[i]).name());
+		delete ptrcaixa[i];
+	}
 }

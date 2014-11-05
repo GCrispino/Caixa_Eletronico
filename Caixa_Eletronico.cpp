@@ -192,18 +192,21 @@ void Caixa_Eletronico::saque(const int conta)
 	bool achousenha = false;
 	const Conta * contabusca = this->buscaConta(conta);
 	
-	if (contabusca->getNumero() == conta) {
-
-		cout<<endl<<"Digite a sua senha: ";
-		cin >> senha;
-		if (contabusca->verificaSenha(senha))
-			achousenha = true;
-	}
 	if (contabusca == 0) {
 		cout<<"\nConta nao encontrada!";
 		getch();
 		return ;
-	} else if(achousenha) {
+	}
+	
+	else if (contabusca->getNumero() == conta) {
+
+		cout<<endl<<"Digite a sua senha: ";
+		cin >> senha;
+	if (contabusca->verificaSenha(senha))
+			achousenha = true;
+			
+	}
+	if(achousenha) {
 		float valor;
 
 		cout<<"\nDigite o valor a ser sacado: ";
