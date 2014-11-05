@@ -17,12 +17,10 @@ bool Caixa_Eletronico::operator == (const Caixa_Eletronico &c1)
 }
 
 ostream &operator << (ostream &output,const Caixa_Eletronico &c)
-{
-	Device *dptr = new Caixa_Eletronico(c);
-	
+{	
 	output<<endl;
 	output<<"\n-- Informacoes gerais do caixa eletronico: \n";
-	cout<<*dptr;
+	cout<<static_cast<const Device&>(c);
 	output<<"\nDinheiro disponivel no caixa: R$"<<c.dinheiro<<".";
 	output<<endl<<"Numero de usuarios cadastrados: "<<c.nusuarios<<" .";
 	output<<endl<<"Numero total de contas cadastradas: "<<c.ntotalcontas<<" .";
@@ -32,33 +30,6 @@ ostream &operator << (ostream &output,const Caixa_Eletronico &c)
 	return output;
 }
 
-Caixa_Eletronico Caixa_Eletronico::operator =(const Caixa_Eletronico &c)
-{
-	this->dinheiro = c.dinheiro;
-	//this->modelo = c.modelo;
-	this->nusuarios = c.nusuarios;
-	this->ntotalcontas = c.ntotalcontas;
-	
-	//Cópia do conteúdo ponteiro 'userpadrao':
-	if (nusuarios <= 1)
-		delete this->userpadrao;
-	else
-		delete [] this->userpadrao;
-		
-	if (this->nusuarios == 0)
-		this->userpadrao = 0;
-	else if (this->nusuarios == 1){
-		this->userpadrao = new Usuario();
-		this->userpadrao[0] = this->userpadrao[0];
-	}
-	else{
-		this->userpadrao = new Usuario[this->nusuarios];
-		for (int i = 0;i < this->nusuarios;i++)
-			this->userpadrao[i] = this->userpadrao[i];
-	}
-	
-	return *this;
-}
 
 Caixa_Eletronico::Caixa_Eletronico(const string &modelo, float dinheiro, int serial,Data datafabricacao,string senhaadm)
 :Device(serial,modelo,datafabricacao,senhaadm), dinheiro(dinheiro)

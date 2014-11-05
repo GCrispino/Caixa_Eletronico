@@ -140,3 +140,7 @@ bool Device::verificaSenha(const string &senha){
 	else 
 		return false;
 }
+
+bool Device::isLigado(){
+	return (this->ligado);
+}

@@ -36,7 +36,7 @@ class Caixa_Eletronico: public Device
 {
 friend ostream &operator << (ostream &,const Caixa_Eletronico &); //sobrecarga do operador "<<".
 
-private:
+protected:
 	float dinheiro; //Dinheiro disponível no caixa eletrônico.
 	Usuario *userpadrao; //array de usuários registrados no caixa
 	int nusuarios; //número de usuários registrados no caixa
@@ -61,7 +61,6 @@ public:
 	
 	
 	bool operator == (const Caixa_Eletronico &c1); //Sobrecarga do operador "==".
-	Caixa_Eletronico operator = (const Caixa_Eletronico &c); //Sobrecarga do operador "=".
 	
 	void registrarUsuario(const string &); //Registra um usuário novo no Caixa.
 	int registrarConta(Usuario &); //Registra uma conta nova no usuário passado como parâmetro.

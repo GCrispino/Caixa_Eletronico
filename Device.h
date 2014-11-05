@@ -27,6 +27,7 @@ protected:
 	Data datafabricacao; //data de fabricação do dispositivo.
 	Data *datasmanutencao; //array que guarda as datas em que o dispositivo sofreu manutenção.
 	int ndatasmanutencao;//número de datas de manutenção.
+	bool ligado; //indica se o device está ligado ou não.
 public:
 	Device(int serial = 0, string modelo = "",Data = Data(),string senha = "123456"); //Construtor default
 	Device(const Device &); //Construtor de cópia
@@ -38,8 +39,9 @@ public:
 	
 	virtual void imprimeDatasManutencao() ;//Imprime as datas em que o dispositivo sofreu manutenção.
 	bool verificaSenha(const string &); //verifica a senha de administrador.
+	bool isLigado(); //verifica se o dispositivo está ligado
 	
-	virtual void ligar() = 0;
+	virtual void ligar() = 0; //liga o dispositivo
 };
 
 #endif // DEVICE_H

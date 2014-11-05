@@ -100,8 +100,6 @@
     <File Name="Conta.h"/>
     <File Name="Usuario.cpp"/>
     <File Name="Usuario.h"/>
-    <File Name="Banco.h"/>
-    <File Name="Banco.cpp"/>
     <File Name="stringDigitos.h"/>
     <File Name="stringDigitos.cpp"/>
     <File Name="Device.h"/>

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <typeinfo>
 
 using namespace std;
 
@@ -6,14 +7,17 @@ using namespace std;
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "Banco.h"
-#include "Caixa_Eletronico.h"
+#include "Caixa_BB.h"
+#include "Caixa_CxEconomica.h"
+#include "Caixa_Bradesco.h"
 #include "stringDigitos.h"
 
 void Menu0(); //primeiro menu que aparece no programa
 void MenuCaixaEletronico(); //Menu do caixa eletrônico do programa
 void MenuOperacao(); //Menu aberto quando se escolhe a opção de realizar uma operação no menu principal.
 void MenuInformacoes(); //Menu que controla as operações de mostrar informações sobre determinada classe.
+
+void print(Caixa_Eletronico *);
 
 int main(int argc, char **argv)
 {
@@ -23,9 +27,13 @@ int main(int argc, char **argv)
 	char r;
 	string modelo,cpf,senha,senhaadm;
 	Conta conta;
-	Caixa_Eletronico c("Caixa1",3000,12345,Data(30,1,2010),"654321"); //Dinheiro disponível no caixa e seu modelo definidos na declaração do objeto.
-	Caixa_Eletronico c2(c);
-	Device *ptrdispositivo = new Caixa_Eletronico(c);
+	Device *dprincipal;//new Caixa_Eletronico("Caixa1",3000,12345,Data(30,1,2010),"654321");
+	Caixa_Eletronico *cprincipal,*csecundario;
+	//Caixa_Eletronico c2(c);
+	//Device *ptrdispositivo = new Caixa_Eletronico(c);
+	
+	cprincipal = new Caixa_BB("Caixa1",3000,12345,Data(30,1,2010),"654321");
+	dprincipal = cprincipal;
 	
 	cout << "\n---Caixa eletronico---: ";
 	cout << "\nPressione qualquer tecla para continuar: ";
@@ -51,21 +59,21 @@ int main(int argc, char **argv)
 							}while(stringDigitos(&cpf) == 0 && cpf.size() != 11);
 				
 							const Usuario *u;
-							u = c.buscaCPF(cpf);
+							u = cprincipal->buscaCPF(cpf);
 				
 			
 							if (u != 0){
-								if (c.registrarConta(const_cast<Usuario&>(*u)) != -1)
-									c.incrementaNContas();
+								if (cprincipal->registrarConta(const_cast<Usuario&>(*u)) != -1)
+									cprincipal->incrementaNContas();
 							}
 							else{
-								c.registrarUsuario(cpf);
-								c.incrementaNContas();
+								cprincipal->registrarUsuario(cpf);
+								cprincipal->incrementaNContas();
 							}
 				
 							break;
 						case 2:
-							if (c.getNContas() == 0){
+							if (cprincipal->getNContas() == 0){
 								cout<<"\nNenhuma conta foi cadastrada!";
 								getch();
 							}
@@ -78,12 +86,12 @@ int main(int argc, char **argv)
 										case 1:
 											cout<<"\nDigite o numero da sua conta: ";
 											cin >> nconta;
-											c.saque(nconta);
+											cprincipal->saque(nconta);
 											break;
 										case 2:
 											cout<<"\nDigite o numero da sua conta: ";
 											cin >> nconta;
-											c.pagamento(nconta);
+											cprincipal->pagamento(nconta);
 											break;
 										case 3:
 											break;
@@ -101,7 +109,7 @@ int main(int argc, char **argv)
 								switch(opcao3){
 									case 1:
 						
-										if (c.getNContas() == 0){
+										if (cprincipal->getNContas() == 0){
 											cout<<endl<<"Nenhuma conta cadastrada!";
 											getch();
 										}
@@ -109,7 +117,7 @@ int main(int argc, char **argv)
 											cout<<endl<<"Digite o numero da conta: ";
 											cin >> nconta;
 									
-											const Conta *conta = c.buscaConta(nconta);
+											const Conta *conta = cprincipal->buscaConta(nconta);
 									
 												if (conta != 0){
 													do{
@@ -143,12 +151,12 @@ int main(int argc, char **argv)
 							
 										break;
 									case 2:
-										if (c.getNUsuarios() == 0)
+										if (cprincipal->getNUsuarios() == 0)
 											cout<<endl<<"Nenhum usuario cadastrado!";
 										else{
 											cout<<endl<<"Digite o CPF do usuario: ";
 											cin >> cpf;
-											u = c.buscaCPF(cpf); //realiza a busca do CPF
+											u = cprincipal->buscaCPF(cpf); //realiza a busca do CPF
 											if (u == 0)//caso o número não seja encontrado, é atribuído o valor 0 ao objeto 'u'.
 												cout<<endl<<"CPF nao encontrado!";
 											else{
@@ -172,13 +180,14 @@ int main(int argc, char **argv)
 									case 3:
 										system("cls");
 										Caixa_Eletronico::mostrarData();
-										cout<<c;
+										cout<<static_cast<Device*>(cprincipal);
+										print(cprincipal);
 										getch();
 										cout<<endl<<"Deseja visualizar as datas de manutencao do caixa(S ou N)?";
 										cin >> r;
 										r = toupper(r);
 										if (r == 'S')// se o usuário desejar, imprime as datas de manutenção do dispsitivo.
-											ptrdispositivo->imprimeDatasManutencao();
+											dprincipal->imprimeDatasManutencao();
 										else if (r != 'N')
 											cout<<endl<<"Opcao invalida!";
 										break;
@@ -208,18 +217,18 @@ int main(int argc, char **argv)
 				
 							Data datafabricacao(dia,mes,ano);
 					
-							Caixa_Eletronico c2(modelo,dinheiro,serial,datafabricacao,"654321");
+							csecundario = new Caixa_BB(modelo,dinheiro,serial,datafabricacao,"654321");
 				
-							if (c2 == c){ //Uso da sobrecarga do operador "==".
+							if (*csecundario == *cprincipal){ //Uso da sobrecarga do operador "==".
 								cout <<"\n Um caixa com os mesmos dados de outro nao pode ser inserido!";
 								getch();
 								break;
 							}
 							else{
-								cout<<endl<<"Caixa antigo: "<<endl<<c<<endl;
-								cout<<endl<<"Caixa novo: "<<endl<<c2<<endl;
+								cout<<endl<<"Caixa antigo: "<<endl<<*cprincipal<<endl;
+								cout<<endl<<"Caixa novo: "<<endl<<*csecundario<<endl;
 					
-								c = c2; //Uso da sobrecarga do operador "=".
+								*cprincipal = *csecundario; //Uso da sobrecarga do operador "=".
 							}
 							getch();
 							break;
@@ -237,7 +246,7 @@ int main(int argc, char **argv)
 				system("cls");
 				cout<<endl<<"Digite a senha de administrador do dispositivo para entrar no menu de manutencao: ";
 				cin >> senha;
-				if (ptrdispositivo->verificaSenha(senha)){
+				if (cprincipal->verificaSenha(senha)){
 					cout<<endl<<"--Menu de manutencao--";
 					getch();
 					cout<<endl<<"Digite a data da manutencao:";
@@ -248,7 +257,7 @@ int main(int argc, char **argv)
 					cout<<endl<<"- Ano: ";
 					cin >> ano;
 					
-					ptrdispositivo->setDatasManutencao(Data(dia,mes,ano));
+					cprincipal->setDatasManutencao(Data(dia,mes,ano));
 				}
 				else{
 					cout<<endl<<"Senha incorreta!";
@@ -314,4 +323,14 @@ void MenuInformacoes(){
 	cout<<endl<<"2. Informacoes sobre um usuario. ";
 	cout<<endl<<"3. Informacoes sobre o caixa eletronico. ";
 	cout<<endl<<"4. Voltar ao menu principal. ";
+}
+
+void print(Caixa_Eletronico *cx){
+		if (typeid(*cx) == typeid(Caixa_BB))
+			cout<<*static_cast<Caixa_BB*>(cx);
+		else if (typeid(*cx) == typeid(Caixa_CxEconomica))
+			cout<<static_cast<Caixa_CxEconomica*>(cx);
+		if (typeid(*cx) == typeid(Caixa_Bradesco))
+			cout<<static_cast<Caixa_Bradesco*>(cx);
+	
 }

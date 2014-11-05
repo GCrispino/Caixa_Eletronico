@@ -1,7 +1,11 @@
-Debug/main.cpp.o: main.cpp Banco.h Data.h Usuario.h Conta.h \
- stringDigitos.h Caixa_Eletronico.h Device.h
+Debug/main.cpp.o: main.cpp Caixa_BB.h Caixa_Eletronico.h Device.h Data.h \
+ Usuario.h Conta.h stringDigitos.h Caixa_CxEconomica.h Caixa_Bradesco.h
 
-Banco.h:
+Caixa_BB.h:
+
+Caixa_Eletronico.h:
+
+Device.h:
 
 Data.h:
 
@@ -11,6 +15,6 @@ Conta.h:
 
 stringDigitos.h:
 
-Caixa_Eletronico.h:
+Caixa_CxEconomica.h:
 
-Device.h:
+Caixa_Bradesco.h:
