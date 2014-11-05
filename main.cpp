@@ -13,6 +13,7 @@ using namespace std;
 #include "stringDigitos.h"
 
 void Menu0(); //primeiro menu que aparece no programa
+void MenuCaixas(); //imprime as opções de caixa disponíveis.
 void MenuCaixaEletronico(); //Menu do caixa eletrônico do programa
 void MenuOperacao(); //Menu aberto quando se escolhe a opção de realizar uma operação no menu principal.
 void MenuInformacoes(); //Menu que controla as operações de mostrar informações sobre determinada classe.
@@ -21,23 +22,56 @@ void print(Caixa_Eletronico *);// função que imprime informações de um caixa
 
 int main(int argc, char **argv)
 {
-	bool achousenha = false;
-	int opcao0,opcao1,opcao2,opcao3,nconta,serial,dia,mes,ano;;
+	bool achousenha = false,invalido;
+	int opcaocaixa,opcao0,opcao1,opcao2,opcao3,nconta,serial,dia,mes,ano;;
 	float dinheiro;
 	char r;
 	string modelo,cpf,senha,senhaadm;
 	Conta conta;
-	Device *dprincipal;//new Caixa_Eletronico("Caixa1",3000,12345,Data(30,1,2010),"654321");
 	Caixa_Eletronico *cprincipal,*csecundario;
+	Device *dprincipal;//new Caixa_Eletronico("Caixa1",3000,12345,Data(30,1,2010),"654321");
 	//Caixa_Eletronico c2(c);
 	//Device *ptrdispositivo = new Caixa_Eletronico(c);
 	
-	cprincipal = new Caixa_BB("Caixa1",3000,12345,Data(30,1,2010),"654321");
-	dprincipal = cprincipal;
 	
-	cout << "\n---Caixa eletronico---: ";
-	cout << "\nPressione qualquer tecla para continuar: ";
-	getch();
+	do{
+		system("cls");
+		MenuCaixas();
+		cin >> opcaocaixa;
+		invalido = false; //variável bool que é verdadeira enquanto o usuário escolher uma opção invalida neste menu.
+		
+		switch(opcaocaixa){
+			case 1: 
+				cprincipal = new Caixa_BB("Caixa1",3000,12345,Data(30,1,2010),"654321");
+				break;
+			case 2:
+				cprincipal = new Caixa_CxEconomica("Caixa1",3000,12345,Data(30,1,2010),"654321");
+				break;
+			case 3:
+				cprincipal = new Caixa_Bradesco("Caixa1",3000,12345,Data(30,1,2010),"654321");
+				break;
+			case 4:
+				cout<<endl<<"Programa encerrado!";
+				getch();
+				return 0;
+			default:
+				invalido = true;
+				cout<<endl<<"Opcao invalida!";
+				getch();
+				break;
+	}
+		dprincipal = cprincipal;
+	}while(invalido);
+	
+	if (cprincipal->isLigado() == 0){
+		cout<<endl<<"Deseja ligar o caixa eletronico(S ou N)?";
+		cin >> r;
+		r = toupper(r);
+		if (r == 'S'){
+			cprincipal->ligar();
+		}
+		
+	}
 	
 	do{
 		Menu0();
@@ -180,7 +214,7 @@ int main(int argc, char **argv)
 									case 3:
 										system("cls");
 										Caixa_Eletronico::mostrarData();
-										cout<<static_cast<Device*>(cprincipal);
+										//cout<<static_cast<Device*>(cprincipal);
 										print(cprincipal);
 										getch();
 										cout<<endl<<"Deseja visualizar as datas de manutencao do caixa(S ou N)?";
@@ -289,14 +323,13 @@ void Menu0(){
 	cout<<endl<<"3. Sair do programa.";
 }
 
-void MenuBanco(){
-	system("cls");
-	cout << "Selecione uma opcao: \n";
-	cout << "\n1. Registrar uma conta. ";
-	cout << "\n2. Realizar alguma operacao. ";
-	cout << "\n3. Informacoes.";
-	cout << "\n4. Usar outro caixa eletronico.";
-	cout << "\n5. Sair do caixa eletronico.";
+void MenuCaixas(){
+	cout<<endl<<"Seja bem vindo! Escolha qual caixa voce deseja utilizar: ";
+	cout<<endl<<" 1. Banco do Brasil";
+	cout<<endl<<" 2. Caixa Economica";
+	cout<<endl<<" 3. Bradesco";
+	cout<<endl<<" 4. Sair do programa";
+	cout<<endl;
 }
 
 void MenuCaixaEletronico(){
@@ -329,8 +362,8 @@ void print(Caixa_Eletronico *cx){
 		if (typeid(*cx) == typeid(Caixa_BB))
 			cout<<*static_cast<Caixa_BB*>(cx);
 		else if (typeid(*cx) == typeid(Caixa_CxEconomica))
-			cout<<static_cast<Caixa_CxEconomica*>(cx);
+			cout<<*static_cast<Caixa_CxEconomica*>(cx);
 		else if (typeid(*cx) == typeid(Caixa_Bradesco))
-			cout<<static_cast<Caixa_Bradesco*>(cx);
+			cout<<*static_cast<Caixa_Bradesco*>(cx);
 	
 }

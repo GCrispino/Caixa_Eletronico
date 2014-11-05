@@ -34,10 +34,11 @@ void Caixa_BB::ligar(){
 	
 	this->ligado = true;
 	
-	system("cls");
+	
 	cout<<endl<<"Caixa ligado!";
 	getch();
 	
+	system("cls");
 	cout<<endl<<"Bem vindo ao caixa eletronico do Banco do Brasil! O banco que é bom para todos!";
 	cout<<endl<<"Pressione qualquer tecla para continuar...";
 	getch();
