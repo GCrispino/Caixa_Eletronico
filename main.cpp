@@ -21,10 +21,11 @@ void MenuInformacoes(); //Menu que controla as operações de mostrar informaç�
 
 void print(Caixa_Eletronico *);// função que imprime informações de um caixa eletrônico em questão usando polimorfismo
 void desaloca(vector <Caixa_Eletronico*> &); //funcão que desaloca os ponteiros armazenados no vector de referências
+void imprimeCaixas(vector <Caixa_Eletronico *> &); //função que procura no vector e conta quantos caixas de cada classe concreta estão registrados.
 
 int main(int argc, char **argv)
 {
-	bool achousenha = false,invalido;
+	bool achousenha = false,laco;
 	int opcaocaixa,opcao0,opcao1,opcao2,opcao3,nconta,serial,dia,mes,ano;;
 	float dinheiro;
 	char r;
@@ -50,7 +51,7 @@ int main(int argc, char **argv)
 		system("cls");
 		MenuCaixas();
 		cin >> opcaocaixa;
-		invalido = false; //variável bool que é verdadeira enquanto o usuário escolher uma opção invalida neste menu.
+		laco = false; //variável bool que mantém o laço enquanto ela for verdadeira
 		
 		switch(opcaocaixa){
 			case 1: 
@@ -63,18 +64,22 @@ int main(int argc, char **argv)
 				cprincipal = new Caixa_Bradesco("Caixa1",3000,12345,Data(30,1,2010),"654321");
 				break;
 			case 4:
+				imprimeCaixas(ptrcaixa);
+				laco = true; //mantém o laço "do-while"
+				break;
+			case 5:
 				cout<<endl<<"Programa encerrado!";
 				desaloca(ptrcaixa);
 				getch();
 				return 0;
 			default:
-				invalido = true;
+				laco = true;
 				cout<<endl<<"Opcao invalida!";
 				getch();
 				break;
 	}
 		dprincipal = cprincipal;
-	}while(invalido);
+	}while(laco);
 	
 	if (cprincipal->isLigado() == 0){
 		cout<<endl<<"Deseja ligar o caixa eletronico(S ou N)?";
@@ -351,7 +356,8 @@ void MenuCaixas(){
 	cout<<endl<<" 1. Banco do Brasil";
 	cout<<endl<<" 2. Caixa Economica";
 	cout<<endl<<" 3. Bradesco";
-	cout<<endl<<" 4. Sair do programa";
+	cout<<endl<<" 4. Imprimir a quantidade de caixas de cada banco disponiveis: ";
+	cout<<endl<<" 5. Sair do programa";
 	cout<<endl;
 }
 
@@ -395,4 +401,44 @@ void desaloca(vector<Caixa_Eletronico*> &ptrcaixa){
 		cout<<endl<<"Deletando objeto da classe "<<(typeid(*ptrcaixa[i]).name());
 		delete ptrcaixa[i];
 	}
+}
+
+void imprimeCaixas(vector <Caixa_Eletronico*> &ptrcaixa){
+	Caixa_BB *ptrbb;
+	Caixa_Bradesco *ptrbradesco;
+	Caixa_CxEconomica *ptrcxeconomica;
+	
+	int cbb = 0,cbr = 0,ccx = 0; //contadores de cada banco
+	
+	for (unsigned int i = 0;i < ptrcaixa.size();i++){
+		ptrbb = dynamic_cast<Caixa_BB*>(ptrcaixa[i]);
+		
+		if (ptrbb != 0)
+			cbb++;
+		else{
+			ptrbradesco = dynamic_cast<Caixa_Bradesco*>(ptrcaixa[i]);
+			
+			if (ptrbradesco != 0)
+				cbr++;
+			else{
+				ptrcxeconomica = dynamic_cast<Caixa_CxEconomica*>(ptrcaixa[i]);
+				if (ptrcxeconomica != 0)
+					ccx++;
+			}
+		}
+	}
+	
+	cout<<endl<<"Quantidade de caixas registrados: ";
+	cout<<endl<<"Caixas do Banco do Brasil: "<<cbb;
+	cout<<endl<<"Caixas do Banco Bradesco: "<<cbr;
+	cout<<endl<<"Caixas da Caixa Economica: "<<ccx;
+	
+	getch();
+	
+	if (ptrbb != 0)
+		delete ptrbb;
+	if (ptrbradesco != 0)
+		delete ptrbradesco;
+	if (ptrcxeconomica != 0)
+		delete ptrcxeconomica;
 }
